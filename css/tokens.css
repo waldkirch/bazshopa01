@@ -1,0 +1,110 @@
+/* ==========================================================================
+   baz · tokens.css — Design Tokens (zentrale Quelle für Theme & Komponenten)
+   Abgeleitet aus dem Logo: Zimt #AB5317 (Wortmarke) + Sonne #FFDE48 (Bildmarke)
+   ========================================================================== */
+:root {
+  /* 1 · Primary — Markenfarben */
+  --baz-cinnamon: #AB5317;      /* rgb(171 83 23)  · Wortmarke, Aktionen, Links */
+  --baz-sun: #FFDE48;           /* rgb(255 222 72) · Bildmarke, Highlights */
+
+  /* 2 · Secondary — abgeleitete Töne */
+  --baz-cinnamon-900: #4E2408;  /* rgb(78 36 8) */
+  --baz-cinnamon-700: #8A4212;  /* rgb(138 66 18) · Hover */
+  --baz-cinnamon-300: #D9A37E;  /* rgb(217 163 126) */
+  --baz-cinnamon-100: #F5E6DA;  /* rgb(245 230 218) */
+  --baz-cinnamon-50:  #FBF4EE;  /* rgb(251 244 238) */
+  --baz-sun-700: #C99A0E;       /* rgb(201 154 14) */
+  --baz-sun-500: #F5C924;       /* rgb(245 201 36) */
+  --baz-sun-200: #FFEFA6;       /* rgb(255 239 166) */
+  --baz-sun-50:  #FFFAE3;       /* rgb(255 250 227) */
+
+  /* 3 · Neutral — warme Wollgrautöne */
+  --n-0:   #FFFFFF;
+  --n-25:  #FDFCFA;
+  --n-50:  #FAF7F2;  /* Off-White */
+  --n-100: #F4EFE7;  /* Wolle */
+  --n-200: #E9E1D5;  /* Sand hell */
+  --n-300: #D6CBBB;
+  --n-500: #9B8F80;
+  --n-600: #756A5E;  /* Sekundärtext · 5.3:1 auf Weiß */
+  --n-800: #3D3128;
+  --n-900: #2B231C;  /* Tinte · dunkelster Ton (heller als #212121) · 15.6:1 auf Weiß */
+
+  /* 4 · Background */
+  --bg: var(--n-0);
+  --bg-soft: var(--n-50);
+  --bg-muted: var(--n-100);
+  --bg-sun: var(--baz-sun-50);
+  --bg-inverse: var(--n-900);
+
+  /* 5 · Typography colors */
+  --text: var(--n-900);
+  --text-2: var(--n-600);
+  --text-brand: var(--baz-cinnamon);   /* 5.3:1 auf Weiß → AA */
+  --text-inverse: var(--n-0);
+
+  /* 6 · Interactive */
+  --action: var(--baz-cinnamon);
+  --action-hover: var(--baz-cinnamon-700);
+  --action-ink: var(--n-0);
+  --focus: var(--baz-cinnamon);
+  --line: rgba(43, 35, 28, .09);
+  --line-strong: rgba(43, 35, 28, .18);
+
+  /* 7 · System & Feedback */
+  --success: #3D7653;  --success-bg: #EAF3EC;   /* rgb(61 118 83)  · Erfolg, Auf Lager */
+  --warning: #96600A;  --warning-bg: #FFF4D6;   /* rgb(150 96 10)  · Niedriger Bestand */
+  --error:   #B5382C;  --error-bg:   #FBEAE7;   /* rgb(181 56 44)  · Fehler, Pflichtfeld */
+  --info:    #3B6679;  --info-bg:    #E7F0F4;   /* rgb(59 102 121) · Hinweise */
+
+  /* Commerce-Signale */
+  --badge-sale: #C23B26;      /* rgb(194 59 38) · Angebot (weiße Schrift 4.9:1) */
+  --badge-new: var(--baz-sun);
+  --badge-best: var(--n-900);
+  --badge-limited: var(--baz-cinnamon);
+  --badge-hand: var(--n-0);
+  --badge-out: var(--n-100);
+
+  /* Stofftöne (Swatches) */
+  --sw-natur: #F3ECDF; --sw-creme: #FBF7EF; --sw-sand: #E5D3B8; --sw-zimt: #C98B5E; --sw-schiefer: #ABA59D; --sw-sonne: #FFDA4D;
+
+  /* Typografie */
+  --font: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fs-mega: clamp(6rem, 25vw, 26rem);
+  --fs-display: clamp(3.5rem, 11vw, 11rem);
+  --fs-h1: clamp(2.75rem, 7vw, 7rem);
+  --fs-h2: clamp(2rem, 4.4vw, 4.25rem);
+  --fs-h3: clamp(1.3rem, 1.9vw, 1.75rem);
+  --fs-h4: 1.125rem;
+  --fs-lead: clamp(1.0625rem, 1.35vw, 1.3rem);
+  --fs-body: 1rem;
+  --fs-sm: .875rem;
+  --fs-xs: .75rem;
+  --lh-mega: .82; --lh-tight: .95; --lh-head: 1.06; --lh-body: 1.7;
+  --tr-tight: -.045em; --tr-head: -.03em; --tr-wide: .14em;
+
+  /* Spacing (8-pt) */
+  --s-1: .25rem; --s-2: .5rem; --s-3: .75rem; --s-4: 1rem; --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4rem; --s-9: 6rem;
+  --section: clamp(5rem, 11vw, 10rem);
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --container: 1480px;
+  --header-h: 72px;
+
+  /* Radius */
+  --r-xs: 6px; --r-sm: 10px; --r-md: 18px; --r-lg: 28px; --r-xl: 44px; --r-pill: 999px;
+
+  /* Schatten — extrem weich, warm getönt */
+  --sh-1: 0 1px 2px rgba(78, 36, 8, .04), 0 4px 14px rgba(78, 36, 8, .035);
+  --sh-2: 0 20px 40px rgba(78, 36, 8, .05);
+  --sh-3: 0 40px 90px -30px rgba(78, 36, 8, .2);
+  --sh-float: 0 24px 60px -18px rgba(78, 36, 8, .22);
+
+  /* Motion */
+  --ease: cubic-bezier(.25, 1, .5, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+  --ease-spring: cubic-bezier(.34, 1.4, .64, 1);
+  --t-fast: .2s; --t: .45s; --t-slow: .9s;
+
+  /* Z-Ebenen */
+  --z-burst: -1; --z-content: 1; --z-sticky: 40; --z-header: 50; --z-chat: 60; --z-scrim: 70; --z-layer: 80; --z-toast: 95;
+}

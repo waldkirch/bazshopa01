@@ -1,0 +1,101 @@
+/* ==========================================================================
+   baz · interactions.css — Icon-Welt & Hover-System
+   Prinzip: Hover = Sonnengelb + Zimtbraun, sanftes Scale, federnde Kurve.
+   Kein reines Schwarz – dunkelster Ton ist --n-900 (#2B231C).
+   ========================================================================== */
+
+/* ---------- Icon-Welt (Duotone) ---------- */
+.icon { --icon-accent: var(--baz-sun); overflow: visible; transition: transform .45s var(--ease-spring); }
+.icon__acc { fill: var(--icon-accent); transform-box: fill-box; transform-origin: center; transition: transform .5s var(--ease-spring), fill .3s; }
+.icon__str { transition: stroke .3s; }
+/* Semantische Icons ohne Akzent (Fehler, Status, Eingabefelder) */
+.toast__icon .icon, .alert > .icon, .field__error .icon, .pay-error > .icon, .testmode .icon, .payel__secure .icon, .field__icon .icon, .demo-note .icon, .stock .icon { --icon-accent: transparent; }
+/* Auf gelben Flächen: Akzent wird weiß */
+.fact__ic .icon, .svc__ic .icon, .chat__fab-ic .icon, .promise__item:hover .icon, .topic:hover .icon, .chain__step:hover .icon, .btn--primary:hover .icon, .btn--ghost:hover .icon, .icon-btn:hover .icon, .chip:hover .icon { --icon-accent: #fff; }
+.is-on > .icon .icon__str, .pcard__wish.is-on .icon__str { fill: currentColor; }
+.is-on > .icon .icon__acc, .pcard__wish.is-on .icon__acc { fill: #fff; opacity: .55; }
+
+/* ---------- Buttons ---------- */
+.btn { transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast), transform .45s var(--ease-spring), box-shadow var(--t); }
+.btn:hover:not(:disabled) { transform: scale(1.045); }
+.btn:active:not(:disabled) { transform: scale(.97); transition-duration: .1s; }
+.btn--primary::before { background: var(--baz-sun); }
+.btn--primary:hover:not(:disabled) { color: var(--action); box-shadow: 0 18px 40px -16px rgba(171, 83, 23, .45); }
+.btn--primary:hover .atc__sum { border-left-color: rgba(171, 83, 23, .3); }
+.btn--ghost:hover:not(:disabled) { background: var(--baz-sun); border-color: var(--baz-sun); color: var(--action); }
+.btn--text:hover { color: var(--action); text-decoration-color: var(--baz-sun); text-decoration-thickness: 3px; }
+.btn:hover .icon { transform: translateX(3px) rotate(-6deg) scale(1.1); }
+.btn:hover .icon__acc { transform: scale(1.3); }
+.paybtn { transition: transform .45s var(--ease-spring), box-shadow var(--t), opacity var(--t-fast); }
+.paybtn:hover { transform: scale(1.03); opacity: 1; box-shadow: 0 0 0 3px var(--baz-sun); }
+.paybtn--apple { background: #212121; }
+.chat__fab:hover { background: var(--baz-sun); color: var(--action); transform: translateY(-3px) scale(1.05); }
+.chat__fab:hover .chat__fab-ic { background: var(--n-0); color: var(--action); }
+.chat__send:hover { background: var(--baz-sun); color: var(--action); transform: scale(1.08); }
+.pcard:hover .pcard__quick:hover, .pcard__quick:hover { background: var(--baz-sun); color: var(--action); transform: scale(1.04); }
+.code:hover { transform: scale(1.06); }
+.code { display: inline-block; transition: background var(--t-fast), transform .4s var(--ease-spring); }
+
+/* ---------- Icon-Buttons & Icon-Container ---------- */
+.icon-btn { transition: background var(--t-fast), color var(--t-fast), transform .45s var(--ease-spring); }
+.icon-btn:hover { background: var(--baz-sun-200); color: var(--action); transform: scale(1.1); }
+.icon-btn--line:hover { background: var(--baz-sun); border-color: var(--baz-sun); }
+.icon-btn:hover .icon { transform: rotate(-8deg) scale(1.08); }
+.icon-btn:hover .icon__acc { transform: scale(1.35); }
+.pcard__wish:hover { background: var(--baz-sun); color: var(--action); transform: scale(1.15) rotate(-6deg); }
+.qty__btn { transition: background var(--t-fast), color var(--t-fast), transform .35s var(--ease-spring); }
+.qty__btn:hover { background: var(--baz-sun); color: var(--action); transform: scale(1.1); }
+.hotspot__btn:hover { background: var(--baz-sun); color: var(--action); transform: scale(1.18); }
+.topic__ic, .promise__ic, .chain__ic, .fact__ic, .svc__ic, .tl__dot, .ctile__go, .bundle__plus { transition: transform .55s var(--ease-spring), background var(--t), color var(--t); }
+.topic:hover .topic__ic, .promise__item:hover .promise__ic, .chain__step:hover .chain__ic, .fact:hover .fact__ic, .svc__card:hover .svc__ic { transform: scale(1.16) rotate(-8deg); background: var(--baz-sun); color: var(--action); }
+.fact:hover .fact__ic, .svc__card:hover .svc__ic { background: var(--action); color: var(--n-0); }
+.fact:hover .fact__ic .icon, .svc__card:hover .svc__ic .icon { --icon-accent: var(--baz-sun); }
+.ctile:hover .ctile__go { transform: scale(1.15) rotate(-12deg); }
+.tl:hover .tl__dot { transform: scale(1.6); }
+.promise__item, .fact, .svc__card, .pillar, .principle, .voice, .member { transition: transform .55s var(--ease-spring), background var(--t), box-shadow var(--t); }
+.fact:hover, .svc__card:hover, .principle:hover, .voice:hover { transform: translateY(-4px) scale(1.015); box-shadow: var(--sh-2); }
+.member:hover .member__art { transform: scale(1.03); }
+
+/* ---------- Links ---------- */
+.link-arrow { transition: color var(--t-fast), gap var(--t) var(--ease), transform .45s var(--ease-spring), border-color var(--t-fast); transform-origin: left center; }
+.link-arrow:hover { transform: scale(1.06); border-bottom-color: var(--baz-sun); }
+.main-nav a, .main-nav button { transition: color var(--t-fast), transform .4s var(--ease-spring); }
+.main-nav a:hover, .main-nav button:hover { color: var(--action); transform: scale(1.08); }
+.main-nav a::after, .main-nav button::after { background: var(--baz-sun); height: 3px; border-radius: 3px; }
+.footer__cols a, .footer__cols .linklike, .crumbs a, .mnav__cats a, .search__faq a, .dash__nav a, .toast__action, .msg__link, .faq-mini a { display: inline-block; transition: color var(--t-fast), transform .4s var(--ease-spring), background var(--t-fast); transform-origin: left center; }
+.footer__cols a:hover, .footer__cols .linklike:hover, .crumbs a:hover, .search__faq a:hover, .toast__action:hover, .msg__link:hover { color: var(--action); transform: scale(1.07) translateX(2px); text-decoration-color: var(--baz-sun); }
+.mnav__cats a:hover, .dash__nav a:hover { background: var(--baz-sun); color: var(--action); transform: scale(1.05); }
+.mnav__list a:hover { color: var(--action); transform: translateX(8px) scale(1.04); }
+p a, li > a:not([class]), .linklike { transition: color var(--t-fast), text-decoration-color var(--t-fast); }
+p a:hover, .linklike:hover, li > a:not([class]):hover { color: var(--action); text-decoration-color: var(--baz-sun); text-decoration-thickness: 3px; }
+.chip { transition: border-color var(--t-fast), background var(--t-fast), color var(--t-fast), transform .4s var(--ease-spring); }
+.chip:hover { background: var(--baz-sun-200); border-color: var(--baz-sun); color: var(--action); transform: scale(1.06); }
+.chip.is-on:hover { background: var(--action); border-color: var(--action); color: #fff; }
+.tab { transition: background var(--t), color var(--t), box-shadow var(--t), transform .4s var(--ease-spring); }
+.tab:hover { color: var(--action); transform: scale(1.05); }
+.size span, .opt__box, .radiocard__box, .payel__tab { transition: border-color var(--t-fast), background var(--t-fast), color var(--t-fast), box-shadow var(--t-fast), transform .4s var(--ease-spring); }
+.size:hover span { border-color: var(--action); color: var(--action); transform: scale(1.05); }
+.size input:checked + span { background: var(--action); border-color: var(--action); color: #fff; }
+.opt:hover .opt__box, .radiocard:hover .radiocard__box { transform: scale(1.02); }
+.mega__item:hover .mega__name, .ctile:hover .ctile__name, .pcard:hover .pcard__name a, .sresult:hover strong, .bundle__item a:hover { color: var(--action); }
+.pcard__name a { transition: color var(--t-fast); }
+.ctile__name { transition: color var(--t); }
+
+/* ---------- Buchstaben-Hover in Überschriften ----------
+   Jeder Buchstabe färbt sich beim Überfahren gelb (bzw. braun/weiß auf
+   gelben Flächen) und springt leicht – Rückweg langsam = Leuchtspur. */
+.wd { display: inline-block; white-space: nowrap; }
+.ch { display: inline-block; transition: color .55s var(--ease-io), transform .7s var(--ease-spring); }
+.ch:hover { color: var(--ch-hover, var(--baz-sun)); transform: translateY(-.06em) scale(1.14) rotate(-5deg); transition-duration: .06s, .22s; }
+.slow__mega, .high__no { --ch-hover: var(--action); }
+.offer__panel, .cta-band__box--sun { --ch-hover: var(--n-0); }
+.cta-band__box:not(.cta-band__box--sun) .cta-band__mega { --ch-hover: var(--n-0); }
+.value:hover .value__no .ch, .manifesto__lines li:hover .ch { color: inherit; }
+.manifesto__lines li:hover { color: var(--action); }
+
+@media (hover: none) { .ch:hover { transform: none; } }
+
+/* Icon-Größen in runden Containern */
+.promise__ic .icon, .fact__ic .icon, .chain__ic .icon, .svc__ic .icon { width: 27px; height: 27px; }
+.topic__ic .icon { width: 22px; height: 22px; }
+.pdp__perks .icon, .co__trust .icon, .paylist .icon { width: 22px; height: 22px; }

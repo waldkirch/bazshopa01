@@ -1,0 +1,50 @@
+/* ==========================================================================
+   baz · motion.css — Seitenübergänge, Scroll-Reveals, Keyframes,
+   prefers-reduced-motion. Nur transform/opacity für flüssige 60 fps.
+   ========================================================================== */
+
+/* Seitenübergang */
+.app { transition: opacity .32s var(--ease-io), transform .32s var(--ease-io), filter .32s var(--ease-io); }
+.app.is-leaving { opacity: 0; transform: translateY(-14px); filter: blur(4px); }
+.app.is-entering { animation: pageIn .9s var(--ease) both; }
+@keyframes pageIn { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+
+/* Scroll-Reveals */
+html.is-ready [data-reveal] { opacity: 0; transform: translateY(32px); transition: opacity .9s var(--ease), transform 1.1s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+html.is-ready [data-reveal].is-in { opacity: 1; transform: none; }
+html.is-ready [data-reveal="img"] { opacity: 1; transform: none; clip-path: inset(18% 8% 18% 8% round var(--r-xl)); transition: clip-path 1.4s var(--ease); }
+html.is-ready [data-reveal="img"] > * { transform: scale(1.18); transition: transform 1.8s var(--ease); }
+html.is-ready [data-reveal="img"].is-in { clip-path: inset(0 0 0 0 round var(--r-xl)); }
+html.is-ready [data-reveal="img"].is-in > * { transform: none; }
+html.is-ready .fullscene__art[data-reveal="img"] { clip-path: inset(10% 6% 10% 6%); }
+html.is-ready .fullscene__art[data-reveal="img"].is-in { clip-path: inset(0); }
+
+/* Keyframes */
+@keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes heroArt { from { opacity: 0; transform: translateY(60px) scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes hlIn { to { transform: scaleX(1); } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+@keyframes pop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: none; } }
+@keyframes bump { 0%, 100% { transform: scale(1); } 35% { transform: scale(1.25) rotate(-8deg); } 65% { transform: scale(.94); } }
+@keyframes heart { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 20%, transparent); } 50% { box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 0%, transparent); } }
+@keyframes ring { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(10deg); } }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@keyframes errIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+@keyframes lineIn { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+@keyframes msgIn { from { opacity: 0; transform: translateY(8px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes typing { 0%, 80%, 100% { transform: translateY(0); opacity: .5; } 40% { transform: translateY(-4px); opacity: 1; } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+@keyframes burstIn { from { transform: scale(0) rotate(-120deg); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Reduzierte Bewegung: Inhalte sofort sichtbar, keine Endlos-Animationen */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  html.is-ready [data-reveal], html.is-ready [data-reveal="img"], html.is-ready [data-reveal="img"] > * { opacity: 1; transform: none; clip-path: none; }
+  .marquee__track { animation: none; }
+  .burst-pose { transition: none; }
+}
+html.reduce-motion .hero__mega span, html.reduce-motion .mega-title .ml > span { transform: none; animation: none; }

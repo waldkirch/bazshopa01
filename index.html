@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>baz – soft happenz · Handgefertigtes aus Alpakawolle</title>
+<meta name="description" content="Bettwäsche, Kissen und Decken aus Alpakawolle – von Hand gefertigt, frei von Kunstfasern. baz – soft happenz.">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:title" content="baz – soft happenz">
+<meta property="og:description" content="Handgefertigte Bettwäsche, Kissen und Wohnaccessoires aus Alpakawolle.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&amp;display=swap">
+<!-- build:css -->
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/sun.css">
+<link rel="stylesheet" href="css/interactions.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/motion.css">
+<!-- /build:css -->
+</head>
+<body>
+<a class="skip" href="#main" data-action="skip">Zum Inhalt springen</a>
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- Bildmarke: seitenübergreifendes Scroll-Element -->
+<div class="burst-stage" aria-hidden="true"><div class="burst-pose"><div class="burst-spin"></div></div></div>
+
+<!-- Ladezustände: Preloader & Routen-Ladebalken mit animierter Sonne -->
+<div class="preloader" aria-hidden="true"><div class="preloader__sun"></div><div class="preloader__bar"><span></span></div><p class="preloader__txt">soft happenz …</p></div>
+<div class="route-bar" aria-hidden="true"><span class="route-bar__fill"><span class="route-bar__sun"></span></span></div>
+
+<header class="site-header">
+  <div class="header__inner container">
+    <button class="icon-btn nav-toggle" type="button" data-action="open-menu" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-nav"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h10"/></svg></button>
+    <a class="brand" href="#start"></a>
+    <nav class="main-nav" aria-label="Hauptnavigation">
+      <ul>
+        <li><a href="#shop" data-nav="shop">Shop</a></li>
+        <li class="has-mega"><button type="button" data-action="toggle-mega" aria-expanded="false" aria-controls="mega">Kategorien <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button></li>
+        <li><a href="#unternehmen" data-nav="unternehmen">Unternehmen</a></li>
+        <li><a href="#philosophie" data-nav="philosophie">Philosophie</a></li>
+        <li><a href="#service" data-nav="service">Service</a></li>
+      </ul>
+    </nav>
+    <div class="header__actions">
+      <button class="icon-btn" type="button" data-action="open-search" aria-label="Suche öffnen" aria-controls="search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg></button>
+      <a class="icon-btn hide-sm" href="#konto" aria-label="Kundenkonto"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c1.4-3.6 4.2-5.2 7.5-5.2s6.1 1.6 7.5 5.2"/></svg></a>
+      <button class="icon-btn cart-btn" type="button" data-action="open-cart" aria-label="Warenkorb öffnen, 0 Artikel" aria-controls="cart"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.1 11.2a2 2 0 0 1-2 1.8H8.1a2 2 0 0 1-2-1.8L5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><span class="cart-count" data-cart-count aria-hidden="true">0</span></button>
+    </div>
+  </div>
+  <div class="mega" id="mega" hidden></div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menü" hidden></div>
+
+<main class="app" id="main" tabindex="-1" data-app></main>
+
+<footer class="site-footer"></footer>
+
+<!-- Layer -->
+<div class="scrim" aria-hidden="true"></div>
+<aside class="drawer" id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden></aside>
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="Suche" hidden></div>
+<div class="modal" id="quick" role="dialog" aria-modal="true" aria-labelledby="quick-title" hidden></div>
+<div class="chat" data-chat></div>
+<div class="toasts" aria-live="polite"></div>
+<section class="cookie" aria-label="Cookie-Einstellungen" hidden></section>
+<div class="processing" role="status" aria-live="assertive" hidden><div class="processing__box"><div class="processing__sun"></div><p class="processing__txt"></p></div></div>
+
+<noscript><p style="padding:2rem;font-family:sans-serif">Bitte aktiviere JavaScript, um den Shop-Prototyp zu nutzen.</p></noscript>
+
+<!-- build:js -->
+<script src="js/data.js"></script>
+<script src="js/art.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/views-shop.js"></script>
+<script src="js/views-pages.js"></script>
+<script src="js/views-checkout.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/main.js"></script>
+<!-- /build:js -->
+</body>
+</html>
