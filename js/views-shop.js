@@ -34,9 +34,9 @@
   V.home = () => {
     const cats = B.CATEGORIES;
     const marquee = ['Temperaturausgleichend', 'Lanolinfrei', 'Handgefertigt', 'Plastikfrei verpackt', 'Versandkostenfrei ab 80 €', '30 Tage Rückgabe'];
-    const mq = marquee.map(t => `<span>${t}</span>${B.sun({ anim: true, speed: 'fast', cls: 'marquee__sep' })}`).join('');
+    const mq = marquee.map(t => `<span>${t}</span>${B.sun({ variant: 'blau', anim: true, speed: 'fast', cls: 'marquee__sep' })}`).join('');
     const html = `
-<section class="hero" aria-labelledby="hero-title">
+<section class="hero" data-pc="braun" aria-labelledby="hero-title">
   <div class="container hero__top">
     <div class="hero__intro">
       <p class="eyebrow" data-reveal>Handgefertigt aus Alpakawolle</p>
@@ -53,19 +53,23 @@
   <div class="hero__stage">
     <p class="hero__mega" aria-hidden="true">${'soft'.split('').map((c, i) => `<span style="--i:${i}">${c}</span>`).join('')}</p>
     <div class="hero__art" data-parallax="-0.07">${B.art.hero()}</div>
-    <a class="hero__tag" href="#p-sonne" data-parallax="0.06"><span class="hero__tag-burst">${B.sun({ anim: true })}</span><span><small>Neu</small><strong>Zierkissen „Sonne“</strong><em>Ansehen ${icon('arrow')}</em></span></a>
+    <a class="stoerer" data-pc="rosa" href="#p-masche" aria-label="Winter-Edit: 20 Prozent Rabatt auf den Strickbezug Masche – zum Angebot">
+      <svg class="stoerer__ring" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><defs><path id="stoerer-circle" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs><circle cx="100" cy="100" r="98" class="stoerer__bg"/><text class="stoerer__txt"><textPath href="#stoerer-circle" startOffset="0" textLength="458" lengthAdjust="spacing">WINTER-EDIT ✺ NUR KURZE ZEIT ✺ WINTER-EDIT ✺ NUR KURZE ZEIT ✺</textPath></text></svg>
+      <span class="stoerer__core">${B.sun({ variant: 'rosa', anim: true })}<span class="stoerer__val">−20%</span><span class="stoerer__sub">Masche</span></span>
+    </a>
+    <a class="hero__tag" href="#p-sonne" data-parallax="0.06"><span class="hero__tag-burst">${B.sun({ variant: 'page', anim: true })}</span><span><small>Neu</small><strong>Zierkissen „Sonne“</strong><em>Ansehen ${icon('arrow')}</em></span></a>
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true"><div class="marquee__track">${mq}${mq}</div></div>
+<div class="marquee" data-pc="braun" aria-hidden="true"><div class="marquee__track">${mq}${mq}</div></div>
 
-<section class="statement container" aria-label="Markenversprechen">
+<section class="statement container" data-pc="blau" aria-label="Markenversprechen">
   <p class="eyebrow" data-reveal>Was wir machen</p>
   <p class="statement__text" data-words>Wir machen Dinge, die leise sind. Kissen, die nicht knistern. Decken, unter denen niemand schwitzt. Aus Wolle, deren Herkunft wir kennen – genäht von Händen, die sich Zeit lassen.</p>
   <a class="link-arrow" href="#unternehmen" data-reveal>Mehr über baz ${icon('arrow')}</a>
 </section>
 
-<section class="hcats" aria-labelledby="cats-title">
+<section class="hcats" data-pc="blau" aria-labelledby="cats-title">
   <div class="hcats__sticky">
     <div class="container hcats__head"><div><p class="eyebrow">Kategorien</p><h2 class="h2" id="cats-title">Fünf Wege zu<br>weicherem Wohnen.</h2></div><p class="hcats__hint">${icon('arrow')} Scrollen</p></div>
     <div class="hcats__viewport"><div class="hcats__track" data-hscroll>
@@ -75,7 +79,7 @@
   </div>
 </section>
 
-<section class="rail container" aria-labelledby="rail-title">
+<section class="rail container" data-pc="blau" aria-labelledby="rail-title">
   ${secHead('Ausgewählt', 'Lieblingsstücke', 'rail-title', `<div class="tabs" role="tablist" aria-label="Produktauswahl">${Object.entries(RAILS).map(([k, r], i) => `<button class="tab" type="button" role="tab" id="tab-${k}" aria-selected="${i === 0}" aria-controls="rail-panel" data-rail="${k}">${r.label}</button>`).join('')}</div>`)}
   <div class="rail__wrap">
     <div class="rail__track" id="rail-panel" role="tabpanel" aria-labelledby="tab-best" data-rail-track>${byIds(railIds('best')).map((p, i) => B.card(p, i)).join('')}</div>
@@ -83,26 +87,34 @@
   </div>
 </section>
 
-<section class="spot" aria-labelledby="spot-title">
-  <div class="container spot__grid">
-    <div class="spot__media" data-reveal="img">
-      <div class="spot__art">${B.art.product(B.product('wolke'), 'creme')}</div>
-      ${[['22%', '30%', 'Bio-Baumwoll-Satin', 'Glatte, kühle Oberfläche mit feinem Glanz.'], ['78%', '46%', 'Verdeckter Reißverschluss', 'Füllung entnehmen oder ergänzen – ganz nach Gefühl.'], ['50%', '58%', 'Gekämmte Alpakawolle', 'Lose gefüllt, damit sie luftig bleibt und sich aufschütteln lässt.']].map(([x, y, t, d], i) => `<div class="hotspot" style="--x:${x};--y:${y}"><button class="hotspot__btn" type="button" aria-expanded="false" aria-controls="hs-${i}" data-action="hotspot"><span class="visually-hidden">${t}</span>${icon('plus')}</button><div class="hotspot__tip" id="hs-${i}" role="tooltip"><strong>${t}</strong><span>${d}</span></div></div>`).join('')}
+<section class="spot" data-pc="blau" aria-labelledby="spot-title">
+  <div class="container">
+    <div class="spot__head">
+      <div><p class="eyebrow" data-reveal>Im Fokus · Wolke</p><h2 class="h2" id="spot-title" data-reveal style="--i:1">Ein Kissen, das sich nach dir richtet.</h2></div>
+      <p class="lead" data-reveal style="--i:2">Zu hoch? Zu flach? Über den verdeckten Reißverschluss passt du die Füllmenge an – bis Kopf und Nacken genau richtig liegen. Fahre über das Bild und entdecke die Details.</p>
     </div>
-    <div class="spot__copy">
-      <p class="eyebrow" data-reveal>Im Fokus · Wolke</p>
-      <h2 class="h2" id="spot-title" data-reveal style="--i:1">Ein Kissen, das sich nach dir richtet.</h2>
-      <p class="lead" data-reveal style="--i:2">Zu hoch? Zu flach? Über den verdeckten Reißverschluss passt du die Füllmenge an – bis Kopf und Nacken genau richtig liegen.</p>
-      <ul class="ticks" data-reveal style="--i:3"><li>${icon('check')} Füllung aus 100 % Alpakawolle</li><li>${icon('check')} Zwei Größen: 40 × 80 und 80 × 80 cm</li><li>${icon('check')} Lüften statt waschen</li></ul>
-      <div class="spot__buy" data-reveal style="--i:4">${B.priceHtml(B.product('wolke'))}<div class="btn-row"><button class="btn btn--primary" type="button" data-action="quick" data-id="wolke">Größe wählen</button><a class="btn btn--text" href="#p-wolke">Alle Details ${icon('arrow')}</a></div></div>
+    <div class="spot__stage" data-spot data-reveal="img">
+      <p class="spot__word" aria-hidden="true">Wolke</p>
+      <div class="spot__art" data-tilt>
+        <div class="spot__img" data-spot-img>${B.art.product(B.product('wolke'), 'creme', 'main', B.product('wolke').sizes[0])}</div>
+        ${[['20%', '30%', 'Bio-Baumwoll-Satin', 'Glatte, kühle Oberfläche mit feinem Glanz.'], ['80%', '44%', 'Verdeckter Reißverschluss', 'Füllung entnehmen oder ergänzen – ganz nach Gefühl.'], ['48%', '52%', 'Gekämmte Alpakawolle', 'Lose gefüllt, damit sie luftig bleibt und sich aufschütteln lässt.'], ['30%', '70%', 'Handgenähte Paspel', 'Jede Naht von Hand gesetzt – mit kleinem baz-Label.']].map(([x, y, t, d], i) => `<div class="hotspot" style="--x:${x};--y:${y}"><button class="hotspot__btn" type="button" aria-expanded="false" aria-controls="hs-${i}" data-action="hotspot"><span class="visually-hidden">${t}</span>${icon('plus')}</button><div class="hotspot__tip" id="hs-${i}" role="tooltip"><strong>${t}</strong><span>${d}</span></div></div>`).join('')}
+      </div>
+      <div class="spot__controls">
+        <div class="seg" role="group" aria-label="Größe ansehen">${B.product('wolke').sizes.map((z, i) => `<button type="button" class="seg__btn" data-spot-size="${i}" aria-pressed="${i === 0}">${z.label}</button>`).join('')}</div>
+        <div class="seg" role="group" aria-label="Farbe ansehen">${B.product('wolke').fabrics.map((f, i) => `<button type="button" class="seg__btn" data-spot-fabric="${f}" aria-pressed="${f === 'creme'}">${B.FABRICS[f].name}</button>`).join('')}</div>
+      </div>
+    </div>
+    <div class="spot__foot">
+      <ul class="ticks" data-reveal><li>${icon('check')} Füllung aus 100 % Alpakawolle</li><li>${icon('check')} Zwei Größen: 40 × 80 und 80 × 80 cm</li><li>${icon('check')} Lüften statt waschen</li></ul>
+      <div class="spot__buy" data-reveal style="--i:1">${B.priceHtml(B.product('wolke'))}<div class="btn-row"><button class="btn btn--primary btn--lg" type="button" data-action="quick" data-id="wolke">Größe wählen ${icon('arrow')}</button><a class="btn btn--text" href="#p-wolke">Alle Details</a></div></div>
     </div>
   </div>
 </section>
 
-<section class="story" aria-labelledby="story-title">
+<section class="story" data-pc="blau" aria-labelledby="story-title">
   <div class="container story__grid">
     <div class="story__visual"><div class="story__sticky">
-      <div class="story__stage">${STORY.map((s, i) => `<div class="story__frame ${i === 0 ? 'is-on' : ''}" data-frame="${i}">${B.art.story(s.art)}</div>`).join('')}<div class="story__burst">${B.sun({ anim: true })}</div></div>
+      <div class="story__stage">${STORY.map((s, i) => `<div class="story__frame ${i === 0 ? 'is-on' : ''}" data-frame="${i}">${B.art.story(s.art)}</div>`).join('')}<div class="story__burst">${B.sun({ variant: 'page', anim: true })}</div></div>
       <p class="story__count"><span data-story-no>01</span> / 04</p>
     </div></div>
     <div class="story__steps">
@@ -112,24 +124,24 @@
   </div>
 </section>
 
-<section class="offer container" aria-labelledby="offer-title">
-  <div class="offer__panel" data-reveal><span class="offer__sun">${B.sun({ variant: 'weiss45', anim: true })}</span>
+<section class="offer container" data-pc="rosa" aria-labelledby="offer-title">
+  <div class="offer__panel" data-reveal><span class="offer__sun">${B.sun({ variant: 'weiss', anim: true })}</span>
     <div class="offer__copy">
       <p class="eyebrow">Winter-Edit · solange der Vorrat reicht</p>
       <p class="offer__mega" aria-hidden="true">−20%</p>
       <h2 class="h3" id="offer-title">auf unseren Strickbezug „Masche“</h2>
       <p>Grobes Rippenmuster, dickes Alpakagarn, Holzknöpfe. Und für deine erste Bestellung: 10 % mit dem Code <button class="code" type="button" data-action="copy-code" data-code="SOFT10" aria-label="Code SOFT10 kopieren">SOFT10</button></p>
-      <a class="btn btn--primary" href="#p-masche">Zum Angebot ${icon('arrow')}</a>
+      <a class="btn btn--primary btn--lg" href="#p-masche">Zum Angebot ${icon('arrow')}</a>
     </div>
     <div class="offer__art" data-parallax="-0.05">${B.art.product(B.product('masche'), 'schiefer')}</div>
   </div>
 </section>
 
-<section class="promise container" aria-label="Unsere Versprechen">
+<section class="promise container" data-pc="rosa" aria-label="Unsere Versprechen">
   ${[['hand', 'Von Hand gefertigt', 'In kleinen Manufakturen statt am Fließband.'], ['leaf', 'Plastikfrei verpackt', 'Baumwollbeutel und Graspapier, das war’s.'], ['truck', 'Versandkostenfrei ab 80 €', 'Klimafreundlich innerhalb Deutschlands.'], ['refresh', '30 Tage Rückgabe', 'Zusätzlich zum gesetzlichen Widerrufsrecht.']].map(([ic, t, d], i) => `<div class="promise__item" data-reveal style="--i:${i}"><span class="promise__ic">${icon(ic)}</span><h3 class="h4">${t}</h3><p>${d}</p></div>`).join('')}
 </section>
 
-<section class="compare container" aria-labelledby="cmp-title">
+<section class="compare container" data-pc="rosa" aria-labelledby="cmp-title">
   ${secHead('Warum Alpaka?', 'Ehrlich verglichen.', 'cmp-title', '<p class="sec-head__note">Vereinfachte Übersicht typischer Materialeigenschaften. Je mehr Punkte, desto ausgeprägter.</p>')}
   <div class="table-wrap" data-reveal><table class="ctable">
     <thead><tr><th scope="col">Eigenschaft</th><th scope="col" class="is-us">Alpaka</th><th scope="col">Schafwolle</th><th scope="col">Daune</th><th scope="col">Polyester</th></tr></thead>
@@ -139,7 +151,7 @@
   </table></div>
 </section>
 
-<section class="slow" aria-labelledby="slow-title">
+<section class="slow" data-pc="rosa" aria-labelledby="slow-title">
   <div class="container slow__grid">
     <div class="slow__media" data-reveal="img">${B.art.product(B.product('huettenruh'), 'natur', 'scene')}</div>
     <div class="slow__copy">
@@ -151,7 +163,7 @@
   </div>
 </section>
 
-<section class="voices container" aria-labelledby="voices-title">
+<section class="voices container" data-pc="blau" aria-labelledby="voices-title">
   ${secHead('Stimmen', 'Bewertungen', 'voices-title', `<p class="demo-note">${icon('info')} Platzhalter-Modul: zeigt im Live-Shop verifizierte Bewertungen aus WooCommerce.</p>`)}
   <div class="voices__grid">${B.SAMPLE_REVIEWS.map((r, i) => `<figure class="voice" data-reveal style="--i:${i}"><span class="voice__stars" aria-hidden="true">${[1, 2, 3, 4, 5].map(() => icon('star')).join('')}</span><blockquote>${r.text}</blockquote><figcaption>${r.title}</figcaption></figure>`).join('')}</div>
 </section>
@@ -186,16 +198,31 @@ ${V.newsletter()}`;
           $$('[data-step]', root).forEach(s => so.observe(s));
         }
         V.mountNewsletter(root);
+        /* Spotlight: Größe/Farbe wechseln, Bild folgt der Maus (Tilt) */
+        const spot = $('[data-spot]', root);
+        if (spot) {
+          const wolke = B.product('wolke'), st = { size: 0, fabric: 'creme' }, img = $('[data-spot-img]', spot);
+          const draw = () => { img.classList.add('is-swap'); setTimeout(() => { img.innerHTML = B.art.product(wolke, st.fabric, 'main', wolke.sizes[st.size]); img.classList.remove('is-swap'); }, 200); };
+          spot.addEventListener('click', e => {
+            const z = e.target.closest('[data-spot-size]'), f = e.target.closest('[data-spot-fabric]');
+            if (z) { st.size = +z.dataset.spotSize; $$('[data-spot-size]', spot).forEach(b => b.setAttribute('aria-pressed', b === z)); draw(); }
+            if (f) { st.fabric = f.dataset.spotFabric; $$('[data-spot-fabric]', spot).forEach(b => b.setAttribute('aria-pressed', b === f)); draw(); }
+          });
+          const art = $('[data-tilt]', spot);
+          spot.addEventListener('pointermove', e => { if (B.reduced || e.pointerType !== 'mouse') return; const r = spot.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; art.style.transform = `perspective(1200px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg) scale(1.02)`; spot.style.setProperty('--mx', (x + .5) * 100 + '%'); });
+          spot.addEventListener('pointerleave', () => { art.style.transform = ''; });
+        }
       }
     };
   };
 
   /* Newsletter (wiederverwendbar) */
-  V.newsletter = () => `<section class="news" aria-labelledby="news-title">
+  V.newsletter = () => `<section class="news" data-pc="braun" aria-labelledby="news-title">
   <div class="container news__inner">
-    <div class="news__copy"><p class="eyebrow">Newsletter</p><h2 class="h2" id="news-title">Post von baz.</h2><p>Neue Stücke, Pflegetipps und leise Geschichten aus der Manufaktur – etwa einmal im Monat. Als Dankeschön gibt’s 10 % auf deine erste Bestellung.</p></div>
+    <span class="news__sun">${B.sun({ variant: 'blau', anim: true })}</span>
+    <div class="news__copy"><p class="eyebrow">Newsletter · 10 % Willkommensrabatt</p><h2 class="h2" id="news-title">Post von baz.</h2><p>Neue Stücke, Pflegetipps und leise Geschichten aus der Manufaktur – etwa einmal im Monat. Als Dankeschön gibt’s 10 % auf deine erste Bestellung.</p></div>
     <form class="news__form" data-form="newsletter" novalidate>
-      <div class="field field--inline"><label class="field__label" for="nl-email">E-Mail-Adresse</label><div class="field__row"><input id="nl-email" name="email" type="email" required autocomplete="email" placeholder="du@beispiel.de"><button class="btn btn--primary" type="submit">Anmelden</button></div></div>
+      <div class="field field--inline"><label class="field__label" for="nl-email">E-Mail-Adresse</label><div class="field__row"><input id="nl-email" name="email" type="email" required autocomplete="email" placeholder="du@beispiel.de"><button class="btn btn--primary btn--lg" type="submit">Jetzt anmelden ${icon('arrow')}</button></div></div>
       <div class="field"><label class="check"><input type="checkbox" id="nl-consent" name="consent" required><span>Ich möchte den Newsletter erhalten und habe die <a href="#recht-datenschutz">Datenschutzhinweise</a> gelesen. Abmeldung jederzeit möglich.</span></label></div>
       <div class="news__done" hidden role="status"><span class="news__done-ic">${icon('check')}</span><div><strong>Fast geschafft!</strong><p>Im Live-Shop folgt jetzt die Bestätigungs-E-Mail (Double-Opt-in). In dieser Demo wird nichts versendet.</p></div></div>
     </form>
@@ -243,7 +270,7 @@ ${V.newsletter()}`;
   <div class="cathead__copy"><nav class="crumbs" aria-label="Brotkrumen"><ol><li><a href="#start">Start</a></li><li><a href="#shop">Shop</a></li><li aria-current="page">${cat.name}</li></ol></nav>
     <h1 class="page-title" tabindex="-1">${cat.name}</h1><p class="lead">${cat.claim}</p>
     <ul class="catnav">${B.CATEGORIES.map(c => `<li><a class="chip ${c.id === cat.id ? 'is-on' : ''}" href="#kat-${c.id}" ${c.id === cat.id ? 'aria-current="page"' : ''}>${c.name}</a></li>`).join('')}</ul></div>
-  <div class="cathead__art" data-parallax="-0.05">${B.art.category(cat)}</div>
+  <div class="cathead__art" data-parallax="-0.05"><span class="cathead__logo">${B.logo({ variant: 'page', label: '' })}</span>${B.art.category(cat)}</div>
 </section>` : `
 <section class="phead container">
   <p class="eyebrow">Shop · ${P().length} Produkte</p>
@@ -279,7 +306,7 @@ ${V.newsletter()}`;
   </div>
 </div>`;
     return {
-      title: (cat ? cat.name : 'Shop') + ' · baz', html, pose: cat ? 'category' : 'shop',
+      title: (cat ? cat.name : 'Shop') + ' · baz', html, pose: cat ? 'category' : 'shop', tone: cat ? cat.theme : 'blau',
       mount(root) {
         const form = $('[data-filters]', root);
         const read = () => {
@@ -332,7 +359,7 @@ ${V.newsletter()}`;
     $('[data-chips]', root).innerHTML = chips.map(([l, k]) => `<button class="chip chip--x" type="button" data-unfilter="${k}" aria-label="Filter ${l} entfernen">${l}${icon('close')}</button>`).join('') + (chips.length > 1 ? `<button class="linklike" type="button" data-action="reset-filters">Alle entfernen</button>` : '');
     const fc = $('[data-filter-count]', root); if (fc) fc.textContent = chips.length ? `(${chips.length})` : '';
     if (!list.length) {
-      grid.innerHTML = `<div class="empty"><div class="empty__art">${B.sun({ anim: true })}</div><h2 class="h3">Hier ist es gerade etwas zu leer.</h2><p>Für diese Filterkombination haben wir nichts gefunden. Lockere die Auswahl – oder lass dich vom ganzen Sortiment inspirieren.</p><button class="btn btn--primary" type="button" data-action="reset-filters">Filter zurücksetzen</button></div>`;
+      grid.innerHTML = `<div class="empty"><div class="empty__art">${B.sun({ variant: 'page', anim: true })}</div><h2 class="h3">Hier ist es gerade etwas zu leer.</h2><p>Für diese Filterkombination haben wir nichts gefunden. Lockere die Auswahl – oder lass dich vom ganzen Sortiment inspirieren.</p><button class="btn btn--primary" type="button" data-action="reset-filters">Filter zurücksetzen</button></div>`;
       $('[data-loadmore]', root).innerHTML = ''; return;
     }
     const isList = s.view === 'list';
@@ -362,7 +389,7 @@ ${V.newsletter()}`;
     const img = (v, sz) => B.art.product(p, st.fabric, v, p.sizes[sz ?? st.size]);
     const html = `
 <nav class="crumbs container" aria-label="Brotkrumen"><ol><li><a href="#start">Start</a></li><li><a href="#shop">Shop</a></li><li><a href="#kat-${p.cat}">${catName(p.cat)}</a></li><li aria-current="page">${esc(p.name)}</li></ol></nav>
-<section class="pdp container" aria-labelledby="pdp-title">
+<section class="pdp container" ${B.themeAttr(p)} aria-labelledby="pdp-title">
   <div class="pdp__gallery">
     <div class="pdp__thumbs" role="tablist" aria-label="Produktansichten">${VIEWS.map(([v, l], i) => `<button class="pdp__thumb" type="button" role="tab" aria-selected="${i === 0}" data-gview="${i}" aria-label="${l}">${img(v)}</button>`).join('')}</div>
     <div class="pdp__stage" data-zoom><div class="pdp__img" data-stage>${img('main')}</div>${B.badges(p, 'pdp__badges')}<p class="pdp__hint">${icon('search')} <span>Zum Zoomen über das Bild fahren</span></p></div>
@@ -377,7 +404,7 @@ ${V.newsletter()}`;
       ${B.picker(p, st, 'pdp')}
       <div data-stock>${B.stockHtml(p)}</div>
       ${sold ? `<div class="notify"><p><strong>Bald wieder da.</strong> Wir sagen dir Bescheid, sobald „${esc(p.name)}“ wieder verfügbar ist.</p><div class="field field--inline"><label class="field__label" for="notify-email">E-Mail-Adresse</label><div class="field__row"><input id="notify-email" type="email" required autocomplete="email" placeholder="du@beispiel.de"><button class="btn btn--primary" type="submit" data-main-atc>Benachrichtigen</button></div></div></div>`
-      : `<div class="pdp__buy">${B.qtyStepper(1, 'data-pdp-qty', p.stock)}<button class="btn btn--primary btn--lg btn--atc" type="submit" data-main-atc><span class="atc__label">In den Warenkorb</span><span class="atc__sum" data-atc-sum>${B.money(B.price(p, st.size, st.opt))}</span></button><button class="icon-btn icon-btn--line ${B.wish.has(p.id) ? 'is-on' : ''}" type="button" data-action="wish" data-id="${p.id}" aria-pressed="${B.wish.has(p.id)}" aria-label="Auf die Merkliste">${icon('heart')}</button></div>`}
+      : `<div class="pdp__buy">${B.qtyStepper(1, 'data-pdp-qty', p.stock)}<button class="btn btn--primary btn--lg btn--atc ${p.sale ? 'btn--sale' : ''}" type="submit" data-main-atc><span class="atc__label">In den Warenkorb</span><span class="atc__sum" data-atc-sum>${B.money(B.price(p, st.size, st.opt))}</span></button><button class="icon-btn icon-btn--line ${B.wish.has(p.id) ? 'is-on' : ''}" type="button" data-action="wish" data-id="${p.id}" aria-pressed="${B.wish.has(p.id)}" aria-label="Auf die Merkliste">${icon('heart')}</button></div>`}
     </form>
     <ul class="pdp__perks"><li>${icon('truck')}<span><strong>Versandkostenfrei ab 80 €</strong> · Lieferung in 2–4 Werktagen</span></li><li>${icon('refresh')}<span><strong>30 Tage Rückgabe</strong> · zusätzlich zum Widerrufsrecht</span></li><li>${icon('shield')}<span><strong>Sicher bezahlen</strong> · Karte, Apple Pay, Google Pay, Klarna</span></li></ul>
     <div class="pdp__acc" data-acc-group="single">
@@ -390,15 +417,15 @@ ${V.newsletter()}`;
   </div></div>
 </section>
 
-<section class="highs container" aria-label="Produktvorteile">${p.highlights.map(([t, d], i) => `<div class="high" data-reveal style="--i:${i}"><span class="high__no">0${i + 1}</span><h2 class="h3">${t}</h2><p>${d}</p></div>`).join('')}</section>
+<section class="highs container" ${B.themeAttr(p)} aria-label="Produktvorteile">${p.highlights.map(([t, d], i) => `<div class="high" data-reveal style="--i:${i}"><span class="high__no">0${i + 1}</span><h2 class="h3">${t}</h2><p>${d}</p></div>`).join('')}</section>
 
 ${partner ? `<section class="bundle container" aria-labelledby="bundle-title">
   ${secHead('Kombinieren', 'Passt perfekt dazu', 'bundle-title')}
   <div class="bundle__box" data-reveal>
     <div class="bundle__items">
-      <div class="bundle__item"><div class="bundle__art">${B.art.product(p, p.fabrics[0])}</div><p><strong>${esc(p.name)}</strong><span>${esc(p.type)} · ${p.sizes[0].label}</span>${B.priceHtml(p, 0, p.option ? p.option.def : undefined)}</p></div>
+      <div class="bundle__item" ${B.themeAttr(p)}><div class="bundle__art">${B.art.product(p, p.fabrics[0])}</div><p><strong>${esc(p.name)}</strong><span>${esc(p.type)} · ${p.sizes[0].label}</span>${B.priceHtml(p, 0, p.option ? p.option.def : undefined)}</p></div>
       <span class="bundle__plus" aria-hidden="true">${icon('plus')}</span>
-      <div class="bundle__item"><a class="bundle__art" href="#p-${partner.id}">${B.art.product(partner, partner.fabrics[0])}</a><p><strong><a href="#p-${partner.id}">${esc(partner.name)}</a></strong><span>${esc(partner.type)} · ${partner.sizes[0].label}</span>${B.priceHtml(partner, 0, partner.option ? partner.option.def : undefined)}</p></div>
+      <div class="bundle__item" ${B.themeAttr(partner)}><a class="bundle__art" href="#p-${partner.id}">${B.art.product(partner, partner.fabrics[0])}</a><p><strong><a href="#p-${partner.id}">${esc(partner.name)}</a></strong><span>${esc(partner.type)} · ${partner.sizes[0].label}</span>${B.priceHtml(partner, 0, partner.option ? partner.option.def : undefined)}</p></div>
     </div>
     <div class="bundle__cta"><p>Zusammen <strong>${B.money(B.price(p, 0, p.option ? p.option.def : undefined) + B.price(partner, 0, partner.option ? partner.option.def : undefined))}</strong></p><button class="btn btn--primary" type="button" data-action="add-bundle" data-ids="${p.id},${partner.id}" ${(!B.inStock(p) || !B.inStock(partner)) ? 'disabled' : ''}>Beides in den Warenkorb</button></div>
   </div>
@@ -421,12 +448,12 @@ ${sold ? '' : `<div class="sticky-atc" aria-hidden="true">
     <span class="sticky-atc__art" data-sticky-art>${img('main')}</span>
     <p class="sticky-atc__info"><strong>${esc(p.name)}</strong><span data-sticky-variant></span></p>
     <span class="sticky-atc__price" data-sticky-price></span>
-    <button class="btn btn--primary" type="button" data-action="sticky-add" tabindex="-1">In den Warenkorb</button>
+    <button class="btn btn--primary ${p.sale ? 'btn--sale' : ''}" type="button" data-action="sticky-add" tabindex="-1">In den Warenkorb</button>
   </div>
 </div>`}`;
 
     return {
-      title: `${p.name} ${p.type} · baz`, html, pose: 'product',
+      title: `${p.name} ${p.type} · baz`, html, pose: 'product', tone: B.theme(p),
       mount(root) {
         const form = $('[data-pdp-form]', root);
         const stage = $('[data-stage]', root);
@@ -502,7 +529,7 @@ ${sold ? '' : `<div class="sticky-atc" aria-hidden="true">
     const p = B.product(id); if (!p) return;
     const st = { fabric: p.fabrics[0], size: 0, opt: p.option ? (p.option.def ?? 0) : undefined, qty: 1 };
     const box = $('#quick .modal__content');
-    box.innerHTML = `<div class="quick">
+    box.innerHTML = `<div class="quick" ${B.themeAttr(p)}>
   <div class="quick__art" data-q-art>${B.art.product(p, st.fabric, 'main', p.sizes[0])}</div>
   <div class="quick__info">
     ${B.badges(p)}
@@ -510,7 +537,7 @@ ${sold ? '' : `<div class="sticky-atc" aria-hidden="true">
     <h2 class="h3" id="quick-title">${esc(p.name)}</h2>
     <div data-q-price>${B.priceHtml(p, st.size, st.opt)}</div>
     <form class="quick__form" data-q-form>${B.picker(p, st, 'q')}${B.stockHtml(p)}
-      <div class="pdp__buy">${B.qtyStepper(1, 'data-q-qty', p.stock)}<button class="btn btn--primary btn--atc" type="submit"><span class="atc__label">In den Warenkorb</span></button></div>
+      <div class="pdp__buy">${B.qtyStepper(1, 'data-q-qty', p.stock)}<button class="btn btn--primary btn--atc ${p.sale ? 'btn--sale' : ''}" type="submit"><span class="atc__label">In den Warenkorb</span></button></div>
     </form>
     <a class="link-arrow" href="#p-${p.id}">Alle Details ansehen ${icon('arrow')}</a>
   </div>
@@ -539,7 +566,7 @@ ${sold ? '' : `<div class="sticky-atc" aria-hidden="true">
     if (q.length < 2) { out.innerHTML = ''; return; }
     const hits = P().filter(p => (p.name + ' ' + p.type + ' ' + catName(p.cat) + ' ' + p.material + ' ' + p.fabrics.map(f => B.FABRICS[f].name).join(' ')).toLowerCase().includes(q));
     const faq = B.FAQ.filter(f => (f.q + ' ' + f.a).toLowerCase().includes(q)).slice(0, 3);
-    out.innerHTML = (hits.length ? `<p class="search__label">${hits.length} Produkt${hits.length > 1 ? 'e' : ''}</p><ul class="search__list">${hits.slice(0, 6).map(p => `<li><a class="sresult" href="#p-${p.id}"><span class="sresult__art">${B.art.product(p, p.fabrics[0])}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.type)}</small></span>${B.priceHtml(p)}</a></li>`).join('')}</ul>${hits.length > 1 ? `<button class="btn btn--ghost" type="button" data-action="search-all" data-q="${esc(q)}">Alle ${hits.length} Treffer im Shop ${icon('arrow')}</button>` : ''}` : `<p class="search__none">Kein Produkt zu „${esc(q)}“. Probier es mit „Kissen“, „Decke“ oder „Sand“.</p>`)
+    out.innerHTML = (hits.length ? `<p class="search__label">${hits.length} Produkt${hits.length > 1 ? 'e' : ''}</p><ul class="search__list">${hits.slice(0, 6).map(p => `<li><a class="sresult" ${B.themeAttr(p)} href="#p-${p.id}"><span class="sresult__art">${B.art.product(p, p.fabrics[0])}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.type)}</small></span>${B.priceHtml(p)}</a></li>`).join('')}</ul>${hits.length > 1 ? `<button class="btn btn--ghost" type="button" data-action="search-all" data-q="${esc(q)}">Alle ${hits.length} Treffer im Shop ${icon('arrow')}</button>` : ''}` : `<p class="search__none">Kein Produkt zu „${esc(q)}“. Probier es mit „Kissen“, „Decke“ oder „Sand“.</p>`)
       + (faq.length ? `<p class="search__label">Aus dem Service</p><ul class="search__faq">${faq.map(f => `<li><a href="#service">${esc(f.q)} ${icon('arrow')}</a></li>`).join('')}</ul>` : '');
   };
 })(window.BAZ = window.BAZ || {});

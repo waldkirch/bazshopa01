@@ -37,13 +37,18 @@
     return `<p class="stock stock--in"><span class="stock__dot"></span>Auf Lager · Versand in 1–2 Werktagen</p>`;
   };
 
+  /* Farbwelt je Kategorie (z. B. Bettdecken = rosa) */
+  B.theme = p => ((B.CATEGORIES.find(c => c.id === (p.cat || p)) || {}).theme || '');
+  /* Produkte stehen immer auf Weiß – keine Farbflächen je Kategorie mehr */
+  B.themeAttr = () => '';
+
   /* ---------- Produktkarte ---------- */
   B.card = (p, i = 0, o = {}) => {
     const sold = !B.inStock(p), fk = p.fabrics[0];
     const wish = B.wish.has(p.id);
     const quick = sold ? `<a class="pcard__quick" href="#p-${p.id}">Benachrichtigen</a>`
       : `<button class="pcard__quick" type="button" data-action="quick" data-id="${p.id}">${(p.sizes.length > 1 || p.option || p.fabrics.length > 1) ? 'Schnell wählen' : 'In den Warenkorb'}</button>`;
-    return `<article class="pcard ${sold ? 'is-soldout' : ''} ${o.cls || ''}" data-card="${p.id}" data-reveal style="--i:${i % 6}">
+    return `<article class="pcard ${sold ? 'is-soldout' : ''} ${o.cls || ''}" ${p.sale ? 'data-sale' : ''} data-card="${p.id}" data-reveal style="--i:${i % 6}">
   <div class="pcard__media">
     <a class="pcard__link" href="#p-${p.id}" tabindex="-1" aria-hidden="true">
       <span class="pcard__img pcard__img--a">${B.art.product(p, fk)}</span>
@@ -195,7 +200,12 @@
     danke:       { x: 34, y: 8, s: 1.2, r: 0, o: 1 },
     legal:       { x: 80, y: 60, s: .5, r: 0, o: .35 }
   };
-  B.burstTo = (name) => {
+  /* Farbton der Hintergrund-Sonne je Seite (CD-Farbversionen) */
+  /* Seitenfarbe laut CD: Shop/Unternehmen = Blau · Philosophie/Service/Konto = Rosa · Rechtliches = Braun (+ Blau) */
+  const TONES = { home: 'braun', shop: 'blau', category: 'blau', product: 'blau', unternehmen: 'blau', philosophie: 'rosa', service: 'rosa', konto: 'rosa', kasse: 'blau', danke: 'blau', legal: 'braun' };
+  B.pageColor = name => TONES[name] || 'braun';
+  B.burstTo = (name, tone) => {
+    const stage = $('.burst-stage'); if (stage) stage.dataset.tone = TONES[name] || 'braun';
     const pose = POSES[name] || POSES.home, el = $('.burst-pose');
     if (!el) return;
     el.style.setProperty('--bx', pose.x + 'vw'); el.style.setProperty('--by', pose.y + 'vh');
@@ -289,7 +299,7 @@
     const cart = $('.cart-btn'); if (!fromEl || !cart || B.reduced) { bump(); return; }
     const a = fromEl.getBoundingClientRect(), b = cart.getBoundingClientRect();
     const dot = document.createElement('span'); dot.className = 'fly-dot';
-    dot.innerHTML = B.burst('#FFDE48');
+    dot.innerHTML = B.burst('#42ACE2');
     document.body.appendChild(dot);
     const sx = a.left + a.width / 2, sy = a.top + a.height / 2, ex = b.left + b.width / 2, ey = b.top + b.height / 2;
     const anim = dot.animate([
@@ -315,14 +325,14 @@
 
   /* ---------- Header: Mega-Menü & Mobile Navigation ---------- */
   B.renderChrome = () => {
-    $('.brand').innerHTML = B.logo({ tagline: false, label: 'baz – zur Startseite' });
+    $('.brand').innerHTML = B.logo({ variant: 'braun-blau', tagline: false, label: 'baz – zur Startseite' });
     const cats = B.CATEGORIES;
     $('#mega').innerHTML = `<div class="mega__inner container">
   <div class="mega__intro"><p class="eyebrow">Kategorien</p><p class="mega__claim">Alles, was weich ist – von Hand gemacht.</p><a class="link-arrow" href="#shop">Alle Produkte ${icon('arrow')}</a></div>
   <ul class="mega__grid">${cats.map(c => `<li><a class="mega__item" href="#kat-${c.id}"><span class="mega__art">${B.art.category(c)}</span><span class="mega__name">${c.name}</span><span class="mega__sub">${c.claim}</span></a></li>`).join('')}</ul>
 </div>`;
     $('#mobile-nav').innerHTML = `<div class="mnav">
-  <div class="mnav__head"><span class="mnav__logo">${B.logo({ tagline: false })}</span><button class="icon-btn" type="button" data-action="close-layer" aria-label="Menü schließen">${icon('close')}</button></div>
+  <div class="mnav__head"><span class="mnav__logo">${B.logo({ variant: 'braun-blau', tagline: false })}</span><button class="icon-btn" type="button" data-action="close-layer" aria-label="Menü schließen">${icon('close')}</button></div>
   <nav aria-label="Mobile Navigation"><ul class="mnav__list">
     ${[['#start', 'Start'], ['#shop', 'Shop'], ['#unternehmen', 'Unternehmen'], ['#philosophie', 'Philosophie'], ['#service', 'Service']].map(([h, l], i) => `<li style="--i:${i}"><a href="${h}">${l}</a></li>`).join('')}
   </ul>
@@ -344,7 +354,9 @@
   function renderFooter() {
     $('.site-footer').innerHTML = `<div class="container">
   <div class="footer__top">
-    <div class="footer__brand">${B.logo({ label: 'baz – soft happenz' })}<p>Handgefertigte Bettwäsche, Kissen und Wohnaccessoires aus Alpakawolle. Gemacht, um zu bleiben.</p></div>
+    <div class="footer__brand">${B.logo({ variant: 'page', label: 'baz' })}<p>Handgefertigte Bettwäsche, Kissen und Wohnaccessoires aus Alpakawolle. Gemacht, um zu bleiben.</p>
+      <p class="footer__h footer__h--social">Folge uns</p>
+      <ul class="social" aria-label="baz in sozialen Netzwerken">${B.SOCIAL.map(([k, l, u], i) => `<li style="--i:${i}"><a class="social__link social__link--${k}" href="${u}" target="_blank" rel="noopener" aria-label="baz auf ${l} (öffnet neues Fenster)">${B.socialIcon(k)}</a></li>`).join('')}</ul></div>
     <nav class="footer__cols" aria-label="Footer">
       <div><h2 class="footer__h">Shop</h2><ul><li><a href="#shop">Alle Produkte</a></li>${B.CATEGORIES.map(c => `<li><a href="#kat-${c.id}">${c.name}</a></li>`).join('')}</ul></div>
       <div><h2 class="footer__h">baz</h2><ul><li><a href="#unternehmen">Über uns</a></li><li><a href="#philosophie">Philosophie</a></li><li><a href="#unternehmen-nachhaltigkeit">Nachhaltigkeit</a></li><li><a href="#konto">Kundenkonto</a></li></ul></div>

@@ -13,8 +13,9 @@
   V.about = () => {
     const html = `
 <section class="phead phead--xl container">
+  <span class="page-emblem" aria-hidden="true">${B.logo({ variant: 'page', label: '' })}</span>
   <p class="eyebrow" data-reveal>Unternehmen</p>
-  <h1 class="mega-title" tabindex="-1"><span class="ml"><span>Wir sind</span></span><span class="ml"><span class="hl-burst">baz.${B.sun({ anim: true, cls: 'hl-burst__mark' })}</span></span></h1>
+  <h1 class="mega-title" tabindex="-1"><span class="ml"><span>Wir sind</span></span><span class="ml"><span class="hl-burst">baz.${B.sun({ variant: 'page', anim: true, cls: 'hl-burst__mark' })}</span></span></h1>
   <div class="phead__cols">
     <p class="lead" data-reveal style="--i:1">Ein junges Label für Dinge, die weich sind und bleiben: Bettwäsche, Kissen und Wohnaccessoires aus Alpakawolle – von Hand gefertigt, ohne Kunstfaser, ohne Eile.</p>
     <p data-reveal style="--i:2">„soft happenz“ ist unser Versprechen: Wenn du dich abends hinlegst, soll etwas Gutes passieren. Dafür arbeiten wir mit wenigen Menschen, die ihr Handwerk lieben – und mit einem Material, das von Natur aus fast alles richtig macht.</p>
@@ -30,6 +31,12 @@
        ['Heute', 'Aus einem Kissen wurde eine kleine Kollektion. Die Prinzipien sind geblieben: wenige Produkte, ehrliche Materialien, volle Transparenz.']]
       .map(([t, d], i) => `<li class="tl" data-reveal style="--i:${i}"><span class="tl__dot"></span><span class="tl__no">0${i + 1}</span><h3 class="h3">${t}</h3><p>${d}</p></li>`).join('')}
   </ol>
+</section>
+
+<section class="tapes" aria-label="Unsere Versprechen">
+  <div class="tape tape--sun" aria-hidden="true"><div class="tape__track">${Array(2).fill(['Handgefertigt in kleinen Serien', 'Reparieren statt ersetzen', 'Plastikfrei verpackt', 'Faire Partnerschaften'].map(t => `<span>${t}</span>${B.sun({ variant: 'weiss', cls: 'tape__sun' })}`).join('')).join('')}</div></div>
+  <div class="tape tape--zimt" aria-hidden="true"><div class="tape__track">${Array(2).fill(['Jede Station offen gelegt', 'Wolle, deren Herkunft wir kennen', 'Gemacht, um zu bleiben'].map(t => `<span>${t}</span>${B.sun({ variant: 'page', cls: 'tape__sun' })}`).join('')).join('')}</div></div>
+  <a class="tapes__badge" href="#unternehmen-lieferkette"><span class="tapes__badge-sun">${B.sun({ variant: 'weiss', anim: true })}</span><span><small>Transparenz</small><strong>Lieferkette ansehen</strong></span>${icon('arrow')}</a>
 </section>
 
 <section class="fullscene" aria-label="Handwerk">
@@ -59,12 +66,12 @@
 <section class="team container" aria-labelledby="team-title">
   <div class="sec-head"><div><p class="eyebrow">Team</p><h2 class="h2" id="team-title">Wenige Hände.<br>Viel Hingabe.</h2></div><p class="sec-head__note">Namen und Porträts werden im Theme über den Block „Team“ gepflegt.</p></div>
   <div class="team__grid">
-    ${[['Gründung & Produkt', 'Entwickelt die Kollektion, testet jede Füllung selbst und sagt öfter „noch nicht gut genug“.', 'sonne'], ['Manufaktur & Handwerk', 'Verantwortet Zuschnitt, Nähte und Füllung – und das kleine Label in jedem Stück.', 'sand'], ['Design & Marke', 'Sorgt dafür, dass baz so aussieht, wie es sich anfühlt: weich, klar, fröhlich.', 'zimt'], ['Service & Versand', 'Beantwortet deine Fragen, packt deine Bestellung und legt manchmal eine Notiz bei.', 'schiefer']]
-      .map(([r, d, f], i) => `<article class="member" data-reveal style="--i:${i}"><div class="member__art sw-bg--${f}">${B.sun({ variant: f === 'sonne' ? 'zimt' : 'gelb', anim: true })}</div><h3 class="h4">${r}</h3><p>${d}</p></article>`).join('')}
+    ${[['Gründung & Produkt', 'Entwickelt die Kollektion, testet jede Füllung selbst und sagt öfter „noch nicht gut genug“.', 'blau'], ['Manufaktur & Handwerk', 'Verantwortet Zuschnitt, Nähte und Füllung – und das kleine Label in jedem Stück.', 'koralle'], ['Design & Marke', 'Sorgt dafür, dass baz so aussieht, wie es sich anfühlt: weich, klar, fröhlich.', 'rosa'], ['Service & Versand', 'Beantwortet deine Fragen, packt deine Bestellung und legt manchmal eine Notiz bei.', 'braun']]
+      .map(([r, d, f], i) => `<article class="member" data-reveal style="--i:${i}"><div class="member__art member__art--${i % 2 ? 'soft' : 'full'}">${B.sun({ variant: i % 2 ? 'page' : 'weiss', anim: true })}</div><h3 class="h4">${r}</h3><p>${d}</p></article>`).join('')}
   </div>
 </section>
 
-<section class="cta-band container"><div class="cta-band__box" data-reveal><span class="cta-band__sun">${B.sun({ variant: 'gelb35', anim: true })}</span><p class="cta-band__mega" aria-hidden="true">soft?</p><div><h2 class="h2">Bereit für weicher?</h2><p>Entdecke die Kollektion – und schlaf ab heute ein bisschen besser.</p><a class="btn btn--primary btn--lg" href="#shop">Zum Shop ${icon('arrow')}</a></div></div></section>`;
+<section class="cta-band container"><div class="cta-band__box" data-reveal><span class="cta-band__sun">${B.sun({ variant: 'weiss', anim: true })}</span><p class="cta-band__mega" aria-hidden="true">soft?</p><div><h2 class="h2">Bereit für weicher?</h2><p>Entdecke die Kollektion – und schlaf ab heute ein bisschen besser.</p><a class="btn btn--primary btn--lg" href="#shop">Zum Shop ${icon('arrow')}</a></div></div></section>`;
     return { title: 'Unternehmen · baz', html, pose: 'unternehmen' };
   };
 
@@ -75,8 +82,8 @@
     const values = [['Natürlich', 'Nur Fasern, die wachsen. Was wir verarbeiten, kann irgendwann zurück in den Kreislauf.'], ['Handgemacht', 'Ein Mensch, ein Stück. Kleine Unregelmäßigkeiten sind kein Fehler, sondern eine Handschrift.'], ['Transparent', 'Wir sagen dir, woher die Wolle kommt, wer näht und was ein Kissen kostet – und warum.'], ['Langlebig', 'Wir entwerfen für Jahrzehnte, nicht für Saisons. Und reparieren, wenn doch mal etwas reißt.'], ['Fair', 'Faire Preise für Tierhalter:innen und Manufakturen. Dafür verzichten wir auf Rabattschlachten.'], ['Fröhlich', 'Nachhaltig muss nicht ernst sein. soft happenz – das Gute darf sich auch gut anfühlen.']];
     const html = `
 <section class="mag-cover container" aria-labelledby="mag-title">
-  <div class="mag-cover__meta"><span>baz Journal</span><span>Ausgabe 01</span><span>Philosophie</span></div>
-  <h1 class="mag-cover__title" id="mag-title" tabindex="-1">Ide<span class="mag-cover__burst">${B.sun({ anim: true })}</span>ale<em>.</em></h1>
+  <span class="page-emblem page-emblem--sm" aria-hidden="true">${B.logo({ variant: 'page', label: '' })}</span>
+  <h1 class="mag-cover__title" id="mag-title" tabindex="-1">Ide<span class="mag-cover__burst">${B.sun({ variant: 'page', anim: true })}</span>ale<em>.</em></h1>
   <div class="mag-cover__foot"><p class="mag-cover__dek">Sechs Gedanken darüber, wie wir schlafen, wohnen und konsumieren wollen.</p><p class="mag-cover__read">Lesezeit · 4 Minuten</p></div>
 </section>
 
@@ -120,7 +127,7 @@
   </div>
 </section>
 
-<section class="cta-band container"><div class="cta-band__box cta-band__box--sun" data-reveal><span class="cta-band__sun">${B.sun({ variant: 'weiss45', anim: true })}</span><p class="cta-band__mega" aria-hidden="true">happenz</p><div><h2 class="h2">Gute Nächte beginnen hier.</h2><p>Finde das Stück, mit dem du alt werden möchtest.</p><a class="btn btn--primary btn--lg" href="#shop">Kollektion entdecken ${icon('arrow')}</a></div></div></section>`;
+<section class="cta-band container"><div class="cta-band__box" data-reveal><span class="cta-band__sun">${B.sun({ variant: 'weiss', anim: true })}</span><p class="cta-band__mega" aria-hidden="true">happenz</p><div><h2 class="h2">Gute Nächte beginnen hier.</h2><p>Finde das Stück, mit dem du alt werden möchtest.</p><a class="btn btn--primary btn--lg" href="#shop">Kollektion entdecken ${icon('arrow')}</a></div></div></section>`;
     return { title: 'Philosophie · baz', html, pose: 'philosophie' };
   };
 
@@ -131,6 +138,7 @@
     const topics = [['truck', 'Versand', 'versand'], ['refresh', 'Rückgabe', 'rueckgabe'], ['shield', 'Zahlung', 'zahlung'], ['drop', 'Pflege', 'pflege'], ['package', 'Bestellstatus', 'status'], ['alert', 'Reklamation', 'kontakt']];
     const html = `
 <section class="phead container">
+  <span class="page-emblem page-emblem--sm" aria-hidden="true">${B.logo({ variant: 'page', label: '' })}</span>
   <p class="eyebrow">Service & Support</p>
   <h1 class="page-title" tabindex="-1">Wie können wir<br>helfen?</h1>
   <div class="faq-search"><label class="visually-hidden" for="faq-q">Häufige Fragen durchsuchen</label>${icon('search')}<input id="faq-q" type="search" placeholder="Frag uns etwas – z. B. „Pflege“ oder „Rückgabe“" autocomplete="off"></div>
@@ -289,6 +297,6 @@
 
   V.notFound = () => ({
     title: 'Seite nicht gefunden · baz', pose: 'legal',
-    html: `<section class="nf container"><p class="nf__mega" aria-hidden="true">4${B.sun({ anim: true, cls: 'nf__burst' })}4</p><h1 class="h2" tabindex="-1">Diese Seite hat sich ins Bett verkrochen.</h1><p class="lead">Vielleicht findest du, was du suchst, im Shop – oder frag unseren Service-Assistenten.</p><div class="btn-row"><a class="btn btn--primary" href="#shop">Zum Shop</a><a class="btn btn--text" href="#start">Zur Startseite</a></div></section>`
+    html: `<section class="nf container"><p class="nf__mega" aria-hidden="true">4${B.sun({ variant: 'page', anim: true, cls: 'nf__burst' })}4</p><h1 class="h2" tabindex="-1">Diese Seite hat sich ins Bett verkrochen.</h1><p class="lead">Vielleicht findest du, was du suchst, im Shop – oder frag unseren Service-Assistenten.</p><div class="btn-row"><a class="btn btn--primary" href="#shop">Zum Shop</a><a class="btn btn--text" href="#start">Zur Startseite</a></div></section>`
   });
 })(window.BAZ = window.BAZ || {});

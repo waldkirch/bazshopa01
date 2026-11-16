@@ -1,0 +1,535 @@
+/* ==========================================================================
+   baz · palette.css — Farbsystem nach Corporate Design (letzte Farbebene)
+   Regeln:
+   · Nur Braun #E7825A, Blau #42ACE2, Rosa #EB579A + jeweils 25 %, dazu Weiß
+     und neutrale Schrift (#212121 / #616161).
+   · Jede Seite – auf der Startseite jede Sektion – hat genau eine Farbe ([data-pc]).
+     Buttons, Icons, Schmuckelemente, Hover: alles in dieser Farbe, nie gemischt.
+   · Braune Seiten nutzen zusätzlich Blau (Hover, Icons) – --pc2.
+   · Produkte immer auf Weiß. Keine Konturen; Zustände nur über Flächen.
+   ========================================================================== */
+
+/* ---------- 1 · Seitenfarben ---------- */
+[data-pc="blau"]  { --pc: var(--baz-blau);  --pc25: var(--baz-blau-25);  --pc2: var(--baz-blau);  --pc2-25: var(--baz-blau-25);  --sun-loader-pc: var(--sun-loader-blau); }
+[data-pc="rosa"]  { --pc: var(--baz-rosa);  --pc25: var(--baz-rosa-25);  --pc2: var(--baz-rosa);  --pc2-25: var(--baz-rosa-25);  --sun-loader-pc: var(--sun-loader-rosa); }
+[data-pc="braun"] { --pc: var(--baz-braun); --pc25: var(--baz-braun-25); --pc2: var(--baz-blau);  --pc2-25: var(--baz-blau-25);  --sun-loader-pc: var(--sun-loader-braun); }
+/* abgeleitete Tokens werden an jedem Farb-Container neu berechnet */
+:root, [data-pc] {
+  --n-50: var(--pc25); --n-100: var(--pc25); --n-200: var(--pc25); --n-300: var(--pc25);
+  --bg-soft: var(--pc25); --bg-muted: var(--pc25); --bg-sun: var(--pc25); --fill: var(--pc25); --fill-hover: var(--pc);
+  --baz-sun: var(--pc2); --baz-sun-200: var(--pc2-25); --baz-sun-50: var(--pc2-25); --baz-sun-500: var(--pc2);
+  --baz-cinnamon-300: var(--pc25); --baz-cinnamon-100: var(--pc25); --baz-cinnamon-50: var(--pc25);
+  --action: var(--pc); --action-hover: var(--pc25); --hover-bg: var(--pc2-25); --hover-ink: var(--ink);
+  --badge-out: var(--pc25); --icon-accent: var(--pc25); --ch-hover: var(--pc2);
+}
+::selection { background: var(--pc25); color: var(--ink); }
+
+/* ---------- 2 · Typo & Schmuck ---------- */
+.eyebrow { color: var(--ink); }
+.eyebrow::before { background: var(--pc); opacity: 1; height: 4px; width: 1.8em; }
+.hl, .hl-burst { color: var(--ink); }
+.hl::after { background: var(--pc2-25); height: .26em; }
+.hero__mega, .footer__mega { color: var(--baz-braun); }
+.slow__mega, .offer__mega, .nf__mega, .mag-cover__title em, .cta-band__mega, .pillar__no, .high__no { color: var(--pc); -webkit-text-stroke: 0; }
+/* farbige Display-Typo: Buchstaben-Hover neutral (keine Mischfarben) */
+.slow__mega, .offer__mega, .nf__mega, .mag-cover__title, .cta-band__mega, .pillar__no, .high__no { --ch-hover: var(--ink); }
+.hero__mega, .footer__mega { --ch-hover: var(--pc2); }
+.story__no, .tl__no, .principle__no, .value__no { color: var(--pc); }
+.value__no { color: var(--pc25); }
+.value:hover .value__no { color: var(--pc); }
+.statement__text .w, .vision__quote .w { color: var(--pc25); }
+.statement__text .w.is-on, .vision__quote .w.is-on { color: var(--ink); }
+.manifesto__lines li:hover { color: var(--pc); }
+.code { background: var(--pc25); color: var(--ink); }
+.scroll-progress, .route-bar__fill { background: var(--pc2); }
+.price__now--sale { color: var(--ink); }
+.price__was, .pcard__type, .muted, .small { color: var(--ink-2); }
+.pcard__stock { color: var(--ink); }
+
+/* ---------- 3 · Logo ---------- */
+.brand { width: 104px; }
+@media (min-width: 1024px) { .brand { width: 118px; } }
+.logo--page .logo__word { fill: var(--pc); }
+.logo--page .logo__sun { fill: var(--pc); opacity: .25; }
+.footer__brand .logo { width: 150px; }
+.page-emblem { display: block; width: clamp(110px, 12vw, 170px); margin-bottom: var(--s-6); animation: pop .9s .2s var(--ease-spring) backwards; }
+.page-emblem--sm { width: clamp(96px, 9vw, 130px); }
+.mag-cover__meta .mag-cover__logo { width: 92px; padding: .35rem .8rem; display: inline-flex; align-items: center; background: #fff; }
+.cathead__logo { position: absolute; left: 5%; top: 6%; width: 26%; z-index: 1; }
+
+/* ---------- 4 · Sonne (Bildmarke) ---------- */
+.sun--page > * { fill: var(--pc2); }
+.sun--page.sun--p25 > * { opacity: .25; }
+.burst-stage .sun > * { transition: fill 1.2s var(--ease); fill: var(--baz-blau); }
+.burst-stage .sun { opacity: .25; }
+.burst-stage[data-tone="blau"] .sun > * { fill: var(--baz-blau); }
+.burst-stage[data-tone="rosa"] .sun > * { fill: var(--baz-rosa); }
+.burst-stage[data-tone="braun"] .sun > * { fill: var(--baz-braun); }
+
+/* ---------- 5 · Navigation ---------- */
+.main-nav a, .main-nav button { color: var(--ink); }
+.main-nav a:hover, .main-nav button:hover, .main-nav button[aria-expanded="true"] { color: var(--pc2); }
+.main-nav a[aria-current] { color: var(--pc); }
+.main-nav a::after, .main-nav button::after { background: var(--pc2); height: 4px; }
+.header__actions .icon-btn { color: var(--pc2); }
+.icon-btn:hover, .icon-btn--line:hover { background: var(--pc2-25); color: var(--pc2); }
+.cart-btn.has-items .cart-count { background: var(--pc2); color: var(--ink); }
+.cart-count { background: var(--ink); }
+.mega { background: rgba(255, 255, 255, .97); }
+.mega__item .mega__art { background: #fff; }
+.mega__item:hover .mega__art { background: var(--pc2-25); }
+.mega__item:hover .mega__name { color: var(--pc2); }
+.mnav__list a:hover { color: var(--pc2); }
+.mnav__cats a { background: var(--pc25); }
+.mnav__cats a:hover { background: var(--pc2); color: var(--ink); }
+.crumbs a:hover { color: var(--pc2); }
+.crumbs [aria-current] { color: var(--ink); }
+
+/* ---------- 6 · Buttons (ohne Konturen, Zustände nur über Fläche) ---------- */
+.btn { border: 0; box-shadow: none; }
+.btn--primary { background: var(--pc); color: var(--ink); transition: background .35s var(--ease) .1s, color var(--t-fast), transform .45s var(--ease-spring); }
+.btn--primary::before { background: var(--hover-bg); }
+.btn--primary:hover:not(:disabled) { background: var(--hover-bg); color: var(--ink); box-shadow: none; }
+.btn--sale, .btn--sale.btn--primary { background: var(--baz-rosa); }
+.btn--sale::before, .btn--sale:hover:not(:disabled) { background: var(--baz-rosa-25) !important; }
+.btn--ghost { background: var(--pc25); color: var(--ink); }
+.btn--ghost:hover:not(:disabled) { background: var(--pc2); color: var(--ink); }
+.btn--text { color: var(--ink); text-decoration-color: var(--pc); text-decoration-thickness: 3px; }
+.btn--text:hover { color: var(--ink); text-decoration-color: var(--pc2); }
+.btn.is-done { background: var(--pc2); color: var(--ink); }
+.btn.is-done::after { color: var(--ink); }
+.btn--primary.is-loading::after { background-image: var(--sun-loader-weiss); }
+.btn--ghost.is-loading::after { background-image: var(--sun-loader-pc); }
+.link-arrow { color: var(--ink); }
+.link-arrow::after { background: var(--pc); }
+.link-arrow:hover { color: var(--ink); }
+.link-arrow:hover::after { background: var(--pc2); }
+p a, li > a:not([class]), .linklike { text-decoration-color: var(--pc); }
+p a:hover, .linklike:hover, li > a:not([class]):hover { color: var(--ink); text-decoration-color: var(--pc2); }
+
+/* ---------- 7 · Auswahl & Formulare ---------- */
+.field input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), .field textarea, .select select, .faq-search input, .chat__form input { background: var(--pc25); }
+.field input:hover, .field textarea:hover, .select select:hover, .faq-search input:hover { background: var(--pc25); }
+.field input:focus, .field textarea:focus, .select select:focus, .faq-search input:focus, .chat__form input:focus { background: #fff; box-shadow: var(--sh-2); }
+/* Felder in farbigen Boxen: weiß */
+.formcard .field input:not([type="checkbox"]), .formcard textarea, .formcard .select select, .dash__card .field input, .news .field input, .co__summary .field input, .billing .field input, .notify .field input { background: #fff; }
+.field.is-invalid input, .field.is-invalid textarea, .field.is-invalid select { background: var(--error-bg); box-shadow: inset 4px 0 0 var(--error); }
+.field__error { color: var(--ink); }
+.field__error .icon { color: var(--error); }
+.check input { background: var(--pc25); }
+.check input:checked { background: var(--pc); }
+.check input::after { border-color: var(--ink); }
+.switch__ui { background: var(--pc25); }
+.switch input:checked + .switch__ui { background: var(--pc); }
+.range { accent-color: var(--pc); }
+.chip { background: var(--pc25); color: var(--ink); }
+.chip:hover { background: var(--pc2); border-color: transparent; color: var(--ink); }
+.chip.is-on, .chip.is-on:hover { background: var(--pc); color: var(--ink); }
+.chip--x { background: var(--pc25); }
+.tabs { background: var(--pc25); }
+.tab { color: var(--ink); }
+.tab:hover { color: var(--ink); background: #fff; }
+.tab[aria-selected="true"] { background: var(--pc); color: var(--ink); box-shadow: none; }
+.size span, .opt__box, .radiocard__box, .seg__btn { background: var(--pc25); color: var(--ink); }
+.size:hover span, .opt:hover .opt__box, .radiocard:hover .radiocard__box, .seg__btn:hover { background: var(--pc2); color: var(--ink); }
+.size input:checked + span, .opt input:checked + .opt__box, .radiocard input:checked + .radiocard__box, .seg__btn[aria-pressed="true"] { background: var(--pc); color: var(--ink); }
+.opt__box em, .opt input:checked + .opt__box em { color: var(--ink); }
+.radiocard input:checked + .radiocard__box::before { box-shadow: inset 0 0 0 6px var(--ink); }
+.qty { background: var(--pc25); }
+.qty__btn:hover { background: var(--pc2); color: var(--ink); }
+.fswatch:hover { background: var(--pc25); }
+.fswatch:has(input:checked) { background: var(--pc25); }
+.filters .btn--block { margin-top: var(--s-5); }
+.coupon summary::before { background: var(--pc25); }
+.coupon--on { background: var(--pc25); color: var(--ink); }
+.coupon--on .icon { color: var(--pc); }
+/* Produktfarben: flach, ohne 3D, ohne Ringe – Auswahl über eine weiße Fläche in der Farbpille */
+.dot, button.dot { box-shadow: none; }
+button.dot::after { display: none; }
+.pcard__swatches { gap: .2rem; padding: .25rem; border-radius: var(--r-pill); background: var(--pc25); }
+button.dot { width: 22px; height: 22px; border: 5px solid transparent; background-clip: padding-box; transition: transform .35s var(--ease-spring), background-color var(--t-fast); box-sizing: content-box; }
+button.dot.is-on { border-color: #fff; }
+button.dot:hover { transform: scale(1.12); }
+.swatches { display: inline-flex; gap: .3rem; padding: .35rem; border-radius: var(--r-pill); background: var(--pc25); }
+.swatch { border-radius: 50%; padding: 5px; transition: background var(--t-fast); }
+.swatch:has(input:checked) { background: #fff; }
+.swatch:hover { background: rgba(255, 255, 255, .6); }
+.swatch__dot, .swatch input:checked + .swatch__dot { box-shadow: none; width: 36px; height: 36px; }
+.fswatch .dot { box-shadow: none; }
+
+/* ---------- 8 · Produkte immer auf Weiß ---------- */
+.pcard__media, .pdp__stage, .pdp__thumb, .quick__art, .line__art, .sresult__art, .bundle__art, .msg__art, .upsell__art, .sumlines__art, .cathead__art, .ctile, .mega__art, .sticky-atc__art, .spot__media { background: #fff !important; }
+.pdp__thumb[aria-selected="true"] { background: var(--pc25) !important; }
+.pcard:hover .pcard__media { box-shadow: var(--sh-3); }
+.pcard__quick { background: var(--pc); color: var(--ink); box-shadow: none; }
+.pcard__quick:hover, .pcard:hover .pcard__quick:hover { background: var(--pc25); color: var(--ink); }
+.pcard[data-sale] .pcard__quick { background: var(--baz-rosa); }
+.pcard[data-sale] .pcard__quick:hover { background: var(--baz-rosa-25); }
+.pcard__wish { background: #fff; color: var(--pc); }
+.pcard__wish:hover { background: var(--pc25); color: var(--pc); }
+.pcard__wish.is-on, .icon-btn.is-on { color: var(--baz-rosa); }
+.badge--sale, .badge--new, .badge--limited { color: var(--ink); }
+.badge--hand { background: #fff; color: var(--ink); }
+.badge--out { color: var(--ink-2); }
+.stock { color: var(--ink); }
+.stock--in .stock__dot { background: var(--baz-blau); color: var(--baz-blau); }
+.stock--low .stock__dot { background: var(--baz-braun); color: var(--baz-braun); }
+.stock--out .stock__dot { background: var(--ink-2); color: var(--ink-2); }
+.pdp__perks { background: var(--pc25); }
+
+/* ---------- 9 · Icons: einfarbig (Voll + 25 %) in Seitenfarbe, immer auf Weiß ---------- */
+.icon__acc { fill: var(--icon-accent); }
+.btn .icon { --icon-accent: rgba(255, 255, 255, .55); }
+.promise__ic, .topic__ic, .chain__ic, .fact__ic, .svc__ic { width: 76px; height: 76px; background: #fff !important; color: var(--pc) !important; box-shadow: var(--sh-1); }
+.promise__ic .icon, .topic__ic .icon, .chain__ic .icon, .fact__ic .icon, .svc__ic .icon { width: 36px !important; height: 36px !important; --icon-accent: var(--pc25) !important; }
+.topic__ic { width: 60px; height: 60px; }
+.topic__ic .icon { width: 30px !important; height: 30px !important; }
+.topic:hover .topic__ic, .promise__item:hover .promise__ic, .chain__step:hover .chain__ic, .fact:hover .fact__ic, .svc__card:hover .svc__ic { background: var(--pc25) !important; color: var(--pc) !important; }
+.topic:hover .icon, .promise__item:hover .icon, .chain__step:hover .icon, .fact:hover .icon, .svc__card:hover .icon { --icon-accent: #fff !important; }
+.ticks .icon, .checklist .icon, .checklist--lg .icon, .pdp__perks .icon, .co__trust .icon, .paylist .icon, .payel__wallet .icon, .payel__secure .icon, .freeship .icon { color: var(--pc); width: 26px; height: 26px; }
+.icon-btn .icon { width: 25px; height: 25px; }
+.icon { --icon-accent: var(--pc25); }
+
+/* ---------- 10 · Flächen & Karten ---------- */
+.acc { background: var(--pc25); }
+.acc:has(.acc__btn[aria-expanded="true"]) { background: var(--pc25); }
+.acc__btn:hover { color: var(--ink); }
+.acc__btn:hover .acc__ic::before, .acc__btn:hover .acc__ic::after { background: var(--pc); }
+.svc__card, .principle, .dash__card, .voice, .pillar, .formcard, .fact { background: var(--pc25); }
+.svc__card:hover, .principle:hover, .voice:hover, .pillar:hover, .fact:hover { background: var(--pc25); }
+.voice__stars { color: var(--pc); }
+.member__art--full { background: var(--pc); }
+.member__art--soft { background: var(--pc25); }
+.tl::before { background: var(--pc25); }
+.tl__dot { background: var(--pc); box-shadow: 0 0 0 4px #fff; }
+.chain__list::before { background: radial-gradient(circle, var(--pc) 2px, transparent 2.5px) 0 50% / 12px 6px repeat-x !important; }
+.high::before { background: var(--pc); }
+.cta-band__box { background: var(--pc25); color: var(--ink); }
+.cta-band__box p:not(.cta-band__mega) { color: var(--ink); }
+.cta-band__box .h2 { color: var(--ink); }
+.empty__art .sun > * { fill: var(--pc2); }
+.loadmore__bar { background: var(--pc25); } .loadmore__bar span { background: var(--pc); }
+.alert { color: var(--ink) !important; }
+.alert--success { background: var(--pc25); } .alert--success > .icon { color: var(--pc); }
+.alert--info { background: var(--pc25); } .alert--info > .icon { color: var(--pc); }
+.alert--warning { background: var(--baz-braun-25); } .alert--warning > .icon { color: var(--baz-braun); }
+.alert--error { background: var(--baz-rosa-25); } .alert--error > .icon { color: var(--baz-rosa); }
+.demo-note { background: var(--pc25); color: var(--ink); }
+.pill--info { background: var(--pc25); color: var(--ink); }
+.testmode { background: var(--pc25); color: var(--ink); }
+.testmode .icon { color: var(--pc); }
+.pay-error { background: var(--baz-rosa-25); color: var(--ink); }
+.pay-error > .icon { color: var(--baz-rosa); }
+.toast__icon { background: var(--pc25) !important; color: var(--pc) !important; }
+.toast--error .toast__icon { background: var(--baz-rosa-25) !important; color: var(--baz-rosa) !important; }
+.toast--warning .toast__icon { background: var(--baz-braun-25) !important; color: var(--baz-braun) !important; }
+.toast--error { box-shadow: var(--sh-float); }
+.toast__action { color: var(--ink); text-decoration-color: var(--pc2); }
+.freeship, .freeship.is-done { background: var(--pc25); }
+.freeship__bar { background: #fff; }
+.freeship__bar span, .freeship.is-done .freeship__bar span { background: var(--pc); }
+.totals__disc dd { color: var(--ink); }
+.upsell__item { background: var(--pc25); }
+.search__bar { background: var(--pc25); }
+.processing__sun .sun > * { fill: var(--pc2); }
+.preloader__bar { background: var(--baz-blau-25); }
+.preloader__bar span { background: var(--baz-blau); }
+.preloader__txt { color: var(--ink); }
+.route-bar__sun .sun > * { fill: var(--pc2); }
+.hotspot__btn { background: #fff; color: var(--pc); }
+.hotspot__btn::before { border-color: var(--pc); }
+.hotspot__btn:hover, .hotspot.is-open .hotspot__btn { background: var(--pc); color: var(--ink); }
+
+/* ---------- 11 · Checkout ---------- */
+.co__progress li::before { background: var(--pc25); }
+.co__progress li.is-active::before { background: var(--pc); }
+.co__progress li.is-done::before { background: var(--ink); }
+.costep { background: var(--pc25); }
+.costep.is-active { background: #fff; }
+.costep__no { background: #fff; }
+.costep.is-active .costep__no { background: var(--pc); color: var(--ink); }
+.costep.is-done .costep__no { background: var(--pc); }
+.costep.is-done .costep__no::after { color: var(--ink); }
+.co__summary { background: var(--pc25) !important; }
+.co__summary .coupon summary::before { background: #fff; }
+.co__or::before, .co__or::after { background: var(--pc25); }
+.payel { background: var(--pc25); }
+.payel__tab { background: #fff; }
+.payel__tab:has(input:checked) { background: var(--pc); }
+.payel__logo, .payel__logo--card, .payel__logo--apple, .payel__logo--google, .payel__logo--klarna, .payel__logo--sepa { background: var(--pc25) !important; box-shadow: none; }
+.payel__logo::after { color: var(--ink) !important; background: transparent !important; }
+.payel__logo--card::after, .payel__logo--apple::after { content: "••"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 10px; width: auto; height: auto; border-radius: 0; margin: 0; }
+.paybtn--apple { background: var(--ink); color: #fff; }
+.paybtn--google { background: var(--pc25); color: var(--ink); }
+.paybtn:hover { box-shadow: none; opacity: .85; }
+.review__grid { background: var(--pc25); }
+.thanks__steps li > span { background: var(--pc25); color: var(--ink); }
+.thanks__steps li.is-done > span { background: var(--pc); color: var(--ink); }
+
+/* ---------- 12 · Service-Chat ---------- */
+.chat__fab { width: 76px; height: 76px; padding: 0; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; background: var(--pc2); color: var(--ink); box-shadow: var(--sh-float); }
+.chat__fab-sun { width: 34px; display: block; }
+.chat__fab-label { display: block !important; font-size: 11px; font-weight: 700; letter-spacing: .04em; line-height: 1; }
+.chat__fab:hover { background: var(--pc2-25); color: var(--ink); transform: scale(1.08); }
+.chat__fab:hover .chat__fab-sun .sun > * { fill: var(--pc2); }
+.chat__avatar { background: var(--pc2); padding: 7px; }
+.msg--user { background: var(--pc25); color: var(--ink); }
+.msg__product { background: var(--pc25); }
+.msg__product:hover { background: var(--pc25); }
+.msg__link { color: var(--ink); text-decoration: underline; text-decoration-color: var(--pc2); text-decoration-thickness: 3px; }
+.chat__online { background: var(--pc2); }
+.chat__send { background: var(--pc2); color: var(--ink); }
+.chat__send:hover { background: var(--pc2-25); color: var(--ink); }
+.chat__quick .chip { background: var(--pc2-25); }
+.chat__quick .chip:hover { background: var(--pc2); }
+.typing__sun .sun > * { fill: var(--pc2); }
+.has-sticky-atc .chat { transform: translateY(-84px); }
+
+/* ---------- 13 · Footer ---------- */
+.site-footer { background: #fff; padding-top: clamp(3rem, 6vw, 5rem); }
+.footer__h { color: var(--ink-2); }
+.footer__cols a, .footer__cols .linklike { color: var(--ink); }
+.footer__cols a:hover, .footer__cols .linklike:hover { color: var(--pc2); text-decoration: none; }
+.social { gap: 1.1rem; }
+.social__link { width: auto; height: auto; background: none !important; color: var(--pc); box-shadow: none !important; border-radius: 0; }
+.social__ic { width: 30px; height: 30px; transition: filter var(--t); }
+.social__link:hover { color: var(--pc2); transform: scale(1.22) rotate(-8deg); }
+.social__link:hover .social__ic { filter: drop-shadow(0 6px 10px var(--pc2-25)) drop-shadow(0 0 0 var(--pc2-25)); }
+.footer__pay { border-top: 0; }
+.footer__pay li { background: var(--pc25); border: 0; color: var(--ink); }
+.footer__mega { margin: var(--s-8) 0 0; padding-bottom: .12em; font-size: clamp(3.4rem, 15.6vw, 17.5rem); line-height: .86; letter-spacing: -.065em; opacity: 1; transform: none; text-align: center; white-space: nowrap; }
+.footer__bottom { border-top: 0; margin-top: 0; color: var(--ink-2); }
+.is-checkout .footer__mega { display: none; }
+
+/* ---------- 14 · Startseite ---------- */
+.hero__facts li { background: rgba(255, 255, 255, .78); }
+.hero__tag-burst { background: var(--pc2); }
+.marquee { background: var(--pc); color: var(--ink); }
+.ctile { box-shadow: none; }
+.ctile:hover { background: var(--pc25) !important; box-shadow: none; }
+.ctile:hover .ctile__name { color: var(--ink); }
+.ctile__no, .ctile__claim { color: var(--ink-2); }
+.ctile--all { background: var(--pc) !important; color: var(--ink); }
+.ctile--all:hover { background: var(--pc25) !important; }
+.ctile__go { background: #fff; color: var(--pc); }
+.story__stage { background: var(--pc25); }
+.story__burst .sun > * { fill: var(--pc); }
+.compare .table-wrap { background: transparent; box-shadow: none; border-radius: 0; }
+.compare .ctable th, .compare .ctable td { background: transparent !important; border: 0; }
+.compare .ctable tbody tr:nth-child(even) > * { background: transparent; }
+.compare .ctable thead th { color: var(--ink-2); }
+.compare .ctable thead .is-us { color: var(--ink); }
+.compare .ctable thead .is-us::after { content: ""; display: block; width: 28px; height: 4px; border-radius: 4px; background: var(--pc); margin-top: .4rem; }
+.compare .ctable .is-us { font-weight: 700; }
+.pips i { background: var(--pc25); } .pips i.on, .is-us .pips i.on { background: var(--pc); }
+.slow__media { background: #fff; }
+.why { background: var(--pc25); }
+.why .fact { background: #fff; }
+
+/* Störer (Rosa – Angebot) */
+.stoerer__bg { fill: var(--baz-rosa); }
+.stoerer__txt { fill: var(--ink); }
+.stoerer__ring { filter: drop-shadow(0 18px 26px rgba(33, 33, 33, .18)); }
+.stoerer__core { background: #fff; box-shadow: none; }
+.stoerer__core .sun > * { fill: var(--baz-rosa); }
+.stoerer__val, .stoerer__sub { color: var(--ink); }
+
+/* Angebot (Rosa) */
+.offer__panel { background: var(--pc25); }
+.offer__copy .eyebrow { color: var(--ink); }
+.offer__art { background: #fff; border-radius: 50%; margin: 0; aspect-ratio: 1; display: grid; place-items: center; box-shadow: var(--sh-3); max-width: 460px; justify-self: center; width: 100%; }
+.offer__art svg { width: 92%; }
+.offer__sun { opacity: .9; }
+
+/* Spotlight „Im Fokus · Wolke“ – hervorgehoben, interaktive Bühne über die ganze Inhaltsbreite */
+.spot { padding-block: clamp(4rem, 8vw, 7rem); background: var(--pc25); margin-bottom: var(--section); padding-bottom: clamp(4rem, 8vw, 7rem) !important; }
+.spot__head { display: grid; gap: var(--s-5); align-items: end; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.spot__head .h2 { margin: 0; }
+@media (min-width: 900px) { .spot__head { grid-template-columns: 1.1fr 1fr; gap: var(--s-8); } }
+.spot__stage { position: relative; height: clamp(380px, 52vw, 720px); border-radius: var(--r-xl); background: #fff; overflow: hidden; box-shadow: var(--sh-3); --mx: 50%; }
+.spot__word { position: absolute; inset: auto 0 -.12em; margin: 0; text-align: center; font-size: clamp(6rem, 24vw, 22rem); font-weight: 800; letter-spacing: -.07em; line-height: .8; color: var(--pc25); pointer-events: none; user-select: none; transform: translateX(calc((var(--mx) - 50%) * -.12)); transition: transform .8s var(--ease); }
+.spot__art { position: absolute; top: 4%; bottom: 10%; left: 50%; aspect-ratio: 1; translate: -50% 0; transition: transform .6s var(--ease); transform-style: preserve-3d; }
+.spot__img { position: absolute; inset: 0; transition: opacity .25s var(--ease), transform .4s var(--ease); }
+.spot__img.is-swap { opacity: 0; transform: scale(.94); }
+.spot__img svg { width: 100%; height: 100%; }
+.spot__controls { position: absolute; left: 50%; bottom: 1.25rem; translate: -50% 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; z-index: 3; }
+.seg { display: inline-flex; gap: .25rem; padding: .3rem; border-radius: var(--r-pill); background: rgba(255, 255, 255, .92); box-shadow: var(--sh-1); }
+.seg__btn { min-height: 40px; padding: 0 1rem; border-radius: var(--r-pill); font-size: var(--fs-sm); font-weight: 600; transition: background var(--t-fast), transform .4s var(--ease-spring); }
+.seg__btn:hover { transform: scale(1.05); }
+.spot__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-5); margin-top: var(--s-6); }
+.spot__foot .ticks { display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; margin: 0; }
+.spot__foot .ticks li { margin: 0; font-weight: 500; }
+.spot__buy { border-top: 0; padding-top: 0; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-5); }
+.spot__buy .price { font-size: 1.6rem; }
+.spot .hotspot__tip { width: 240px; }
+
+/* Newsletter: farbig abgesetzt, starker CTA (Braun + Blau) */
+.news { background: var(--pc25); margin-top: var(--section); position: relative; overflow: hidden; }
+.news__inner { border-top: 0; padding-block: clamp(3.5rem, 7vw, 6rem); position: relative; }
+.news__sun { position: absolute; width: clamp(160px, 20vw, 300px); right: -2%; top: -30%; opacity: .9; pointer-events: none; }
+.news__form { position: relative; z-index: 1; background: #fff; padding: clamp(1.25rem, 3vw, 2rem); border-radius: var(--r-lg); box-shadow: var(--sh-3); }
+.news .btn--primary { background: var(--pc2); }
+.news .btn--primary::before, .news .btn--primary:hover:not(:disabled) { background: var(--pc2-25); }
+.news .field input:not([type="checkbox"]) { background: var(--pc25); }
+.news__done { background: var(--pc2-25); }
+.news__done-ic { background: var(--pc2); color: var(--ink); }
+.news + .site-footer, .news ~ * { margin-top: 0; }
+
+/* ---------- 15 · Unternehmen & Philosophie ---------- */
+.tape--sun { background: var(--pc); color: var(--ink); }
+.tape--zimt { background: var(--pc25); color: var(--ink); }
+.tape--zimt .tape__sun > * { fill: var(--pc); }
+.tapes__badge-sun { background: var(--pc); }
+.tapes__badge:hover { background: var(--pc25); color: var(--ink); }
+.tapes__badge small { color: var(--ink-2); }
+.mag-cover__meta span { background: var(--pc25); }
+.mag-cover__burst .sun > * { fill: var(--pc); }
+.hl-burst__mark > * { fill: var(--pc); }
+.fullscene__art { background: #fff; }
+.topic { background: var(--pc25); }
+.topic:hover { background: var(--pc25); }
+.svc__card .mini-table tr:nth-child(odd) > * { background: #fff; }
+.auth__card { box-shadow: var(--sh-3); }
+.stat { background: var(--pc25); }
+.dash__nav a:hover { background: var(--pc25); color: var(--ink); }
+.legal .checklist .icon { color: var(--pc2); }
+
+/* ---------- 16 · Sonstiges ---------- */
+.cookie .btn--primary { background: var(--pc2); }
+.sticky-atc { background: rgba(255, 255, 255, .96); }
+.nf__burst > * { fill: var(--pc); }
+.processing { background: rgba(255, 255, 255, .85); }
+
+/* ---------- 17 · Korrekturen ---------- */
+.hotspot__btn { position: relative; width: 44px; height: 44px; margin: -22px 0 0 -22px; box-shadow: var(--sh-float); }
+.hotspot__btn::before { border: 3px solid var(--pc); inset: -7px; }
+.story__stage { background: #fff; box-shadow: var(--sh-3); }
+.slow__media, .fullscene__art { background: #fff; box-shadow: var(--sh-3); }
+/* Keine Konturen an Buttons, Auswahl- und Eingabefeldern – Zustände nur über Fläche (Fokusring bleibt für Tastatur) */
+.btn, .chip, .size span, .opt__box, .radiocard__box, .payel__tab, .qty, .check input, .icon-btn, .fswatch, .mnav__cats a, .coupon summary::before, .footer__pay li, .seg__btn, .tab,
+.field input, .field textarea, .select select, .faq-search input, .chat__form input, .ctile, .mega__item, .pdp__thumb, .swatch, .dot {
+  border-color: transparent !important; outline-color: transparent;
+}
+.chip, .chip:hover, .chip.is-on, .size span, .opt__box, .opt input:checked + .opt__box, .radiocard__box, .payel__tab, .tab[aria-selected="true"], .pdp__thumb, .pdp__thumb[aria-selected="true"], .icon-btn--line { box-shadow: none !important; }
+.chip.is-on:hover { background: var(--pc25); color: var(--ink); }
+:focus-visible { outline: 3px solid var(--ink) !important; outline-offset: 3px; }
+
+/* ==========================================================================
+   18 · Feinschliff (Runde 3)
+   ========================================================================== */
+
+/* Header-Logo: auf rosa Seiten (Philosophie, Service, Konto) die rosa Wort-Bildmarke */
+body[data-pc="rosa"] .site-header .logo__word, body[data-pc="rosa"] .site-header .logo__word * { fill: var(--baz-rosa); }
+body[data-pc="rosa"] .site-header .logo__sun { fill: var(--baz-rosa); }
+.site-header .logo * { transition: fill .6s var(--ease); }
+
+/* Philosophie: Titel „Ideale.“ färbt sich beim Überfahren */
+.mag-cover__title { --ch-hover: var(--pc); }
+.mag-cover { padding-top: var(--s-6); }
+
+/* --- Linkfarbe beim Hover = Farbe der Zielseite --- */
+a, .main-nav button { --to: var(--pc2); }
+a[href="#"], a[href="#start"], a[href="#home"], a[href^="#recht-"] { --to: var(--baz-braun); }
+a[href^="#shop"], a[href^="#kat-"], a[href^="#p-"], a[href^="#unternehmen"], a[href^="#kasse"], a[href^="#warenkorb"], .main-nav button { --to: var(--baz-blau); }
+a[href^="#philosophie"], a[href^="#service"], a[href^="#konto"] { --to: var(--baz-rosa); }
+.main-nav a:hover, .main-nav button:hover, .main-nav button[aria-expanded="true"], .mnav__list a:hover, .footer__cols a:hover, .crumbs a:hover,
+.link-arrow:hover, .btn--text:hover, p a:hover, li > a:not([class]):hover, .msg__link:hover, .mega__item:hover .mega__name { color: var(--to); }
+.main-nav a::after, .main-nav button::after { background: var(--to); }
+.link-arrow:hover::after { background: var(--to); }
+.btn--text:hover, p a:hover, li > a:not([class]):hover { text-decoration-color: var(--to); }
+.mega__item:hover .mega__art { background: var(--baz-blau-25); }
+
+/* --- Hover von Buttons & Links: Schnitt „Black“ (900) – Breite wird per JS reserviert --- */
+.main-nav a, .main-nav button, .footer__cols a, .footer__cols .linklike, .mnav__list a, .crumbs a, .link-arrow { transition: color var(--t-fast), font-weight 0s; }
+.footer__cols a, .footer__cols .linklike, .crumbs a { display: inline-block; }
+.main-nav a:hover, .main-nav button:hover, .footer__cols a:hover, .footer__cols .linklike:hover, .mnav__list a:hover, .crumbs a:hover,
+.link-arrow:hover, .btn:hover:not(:disabled), .chip:hover, .tab:hover, .seg__btn:hover, .size:hover span, .mega__item:hover .mega__name, p a:hover { font-weight: 900; }
+.btn, .chip, .tab, .seg__btn, .size span { justify-content: center; }
+
+/* --- Volltonflächen: Beschriftung weiß --- */
+.btn--primary, .btn--sale, .btn.is-done, .pcard__quick, .chip.is-on, .tab[aria-selected="true"], .seg__btn[aria-pressed="true"],
+.size input:checked + span, .opt input:checked + .opt__box, .radiocard input:checked + .radiocard__box, .payel__tab:has(input:checked),
+.ctile--all, .marquee, .chat__fab, .chat__send, .costep.is-active .costep__no, .costep.is-done .costep__no, .thanks__steps li.is-done > span,
+.hotspot__btn:hover, .hotspot.is-open .hotspot__btn, .qty__btn:hover, .cart-btn.has-items .cart-count, .chip:hover, .mnav__cats a:hover,
+.size:hover span, .opt:hover .opt__box, .radiocard:hover .radiocard__box, .seg__btn:hover, .btn--ghost:hover:not(:disabled) { color: #fff; }
+.opt input:checked + .opt__box em, .opt:hover .opt__box em, .btn.is-done::after, .costep.is-done .costep__no::after { color: #fff; }
+.btn--primary .icon, .btn--sale .icon { --icon-accent: rgba(255, 255, 255, .45); }
+.stoerer__txt { fill: #fff; }
+.chat__fab-label { color: #fff; }
+/* Hover auf Vollton-Buttons: 25 %-Fläche, Schrift dunkel (Weiß wäre dort unlesbar) */
+.btn--primary:hover:not(:disabled), .btn--sale:hover:not(:disabled), .pcard__quick:hover, .chat__send:hover, .chat__fab:hover { color: var(--ink); }
+.chat__fab:hover .chat__fab-label { color: var(--ink); }
+.chip.is-on:hover { color: var(--ink); }
+
+/* --- Eingabefelder: inaktiv 35 % Weiß (auf Farbfläche) bzw. 25 %-Ton (auf Weiß), aktiv 100 % Weiß + Kontur in Vollton --- */
+.field input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), .field textarea, .select select, .faq-search input, .chat__form input {
+  background: var(--pc25) !important; box-shadow: none; transition: background var(--t-fast), box-shadow var(--t-fast);
+}
+.formcard .field input:not([type="checkbox"]), .formcard textarea, .formcard .select select,
+.co__summary .field input, .dash__card .field input, .dash__card .select select, .costep:not(.is-active) .field input {
+  background: rgba(255, 255, 255, .35) !important;
+}
+.field input:not([type="checkbox"]):not([type="radio"]):focus, .field textarea:focus, .select select:focus, .faq-search input:focus, .chat__form input:focus {
+  background: #fff !important; box-shadow: inset 0 0 0 2px var(--pc) !important; outline: none !important;
+}
+.field.is-invalid input, .field.is-invalid textarea, .field.is-invalid select { box-shadow: inset 0 0 0 2px var(--baz-rosa) !important; }
+:focus-visible { outline-color: var(--pc) !important; }
+
+/* --- Farbauswahl im Shop: nur auf Weiß, Auswahl = kleiner Balken unter dem Farbpunkt --- */
+.pcard__swatches, .swatches { background: none !important; padding: .2rem 0 .7rem; }
+button.dot, .swatch__dot, .fswatch .dot { box-shadow: 0 2px 8px rgba(33, 33, 33, .14) !important; }
+button.dot { position: relative; border: 0 !important; box-sizing: border-box; width: 22px; height: 22px; margin: 0 2px; }
+button.dot::after { display: none !important; }
+button.dot.is-on { transform: scale(1.15); }
+button.dot.is-on::before, .swatch:has(input:checked)::after, .fswatch:has(input:checked) .dot::after {
+  content: ""; position: absolute; left: 50%; bottom: -9px; width: 12px; height: 3px; border-radius: 3px; background: var(--pc); transform: translateX(-50%);
+}
+.swatch { position: relative; padding: 4px; background: none !important; }
+.swatch:has(input:checked) .swatch__dot { transform: scale(1.1); }
+.swatch__dot { transition: transform .35s var(--ease-spring); }
+.fswatch, .fswatch:hover, .fswatch:has(input:checked) { background: none !important; }
+.fswatch .dot { position: relative; }
+.fswatch:has(input:checked) { font-weight: 700; }
+.fswatch:hover .dot { transform: scale(1.12); }
+
+/* --- Service: schwebende weiße Kacheln mit weichem Schatten in Seitenfarbe --- */
+.topics { gap: clamp(.9rem, 2vw, 1.5rem); }
+.topic, .svc__card {
+  background: #fff !important; color: var(--pc);
+  box-shadow: 0 26px 60px -18px color-mix(in srgb, var(--pc) 42%, transparent), 0 6px 18px -6px color-mix(in srgb, var(--pc) 18%, transparent);
+  transition: transform .5s var(--ease-spring), box-shadow .5s var(--ease);
+}
+.topic:hover, .svc__card:hover { background: #fff !important; transform: translateY(-6px);
+  box-shadow: 0 36px 70px -16px color-mix(in srgb, var(--pc) 55%, transparent), 0 8px 22px -6px color-mix(in srgb, var(--pc) 22%, transparent); }
+.topic { aspect-ratio: 1; flex-direction: column !important; align-items: center !important; justify-content: center; gap: .9rem; text-align: center;
+  font-size: 1.2rem; font-weight: 700; color: var(--pc) !important; padding: 1rem; }
+.topic > .icon:last-child { display: none; }
+.topic__ic, .svc__ic { width: auto !important; height: auto !important; background: none !important; box-shadow: none !important; border-radius: 0; }
+.topic__ic .icon { width: clamp(48px, 5vw, 64px) !important; height: clamp(48px, 5vw, 64px) !important; transition: transform .5s var(--ease-spring); }
+.topic:hover .topic__ic .icon, .svc__card:hover .svc__ic .icon { transform: scale(1.12) rotate(-4deg); --icon-accent: var(--pc25) !important; }
+.topic:hover .topic__ic, .svc__card:hover .svc__ic { background: none !important; }
+.svc__card { padding: clamp(1.75rem, 3vw, 2.5rem); }
+.svc__ic { display: flex !important; justify-content: center; margin-bottom: var(--s-4); }
+.svc__ic .icon { width: 64px !important; height: 64px !important; transition: transform .5s var(--ease-spring); }
+.svc__card .h3 { color: var(--pc); text-align: center; font-weight: 700; }
+.svc__card p, .svc__card li, .svc__card td, .svc__card th { color: var(--ink); }
+.svc__card .mini-table tr:nth-child(odd) > * { background: var(--pc25); }
+@media (max-width: 899px) { .topics { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .topics { grid-template-columns: repeat(6, 1fr); } }
+
+/* --- FAQ / Akkordeons: zu = 25 %, Hover zu = Vollton + weiß, offen = weiß + Überschrift in Seitenfarbe --- */
+.acc { background: var(--pc25); transition: background var(--t), box-shadow var(--t); }
+.acc__btn { transition: color var(--t-fast); }
+.acc:has(.acc__btn[aria-expanded="false"]:hover) { background: var(--pc); }
+.acc__btn[aria-expanded="false"]:hover { color: #fff !important; }
+.acc__btn[aria-expanded="false"]:hover .acc__ic::before, .acc__btn[aria-expanded="false"]:hover .acc__ic::after { background: #fff !important; }
+.acc__btn[aria-expanded="false"]:hover .pill, .acc__btn[aria-expanded="false"]:hover small { color: #fff; }
+.acc:has(.acc__btn[aria-expanded="true"]) { background: #fff !important;
+  box-shadow: 0 22px 50px -18px color-mix(in srgb, var(--pc) 40%, transparent), 0 4px 14px -6px color-mix(in srgb, var(--pc) 16%, transparent); }
+.acc__btn[aria-expanded="true"] { color: var(--pc) !important; font-weight: 700; }
+.acc__btn[aria-expanded="true"] .acc__ic::before, .acc__btn[aria-expanded="true"] .acc__ic::after { background: var(--pc) !important; }
+/* Programmatisch fokussierte Überschriften (nach Seitenwechsel) ohne Fokusrahmen */
+[tabindex="-1"]:focus, [tabindex="-1"]:focus-visible { outline: none !important; }
+/* Auf 25 %-Flächen wäre der 25 %-Hover unsichtbar → dort Weiß */
+.formcard, .co__summary, .dash__card, .acc, .offer__panel, .cta-band__box, .why, .spot, .news, .costep:not(.is-active), .story__stage, .svc__card .mini-table, .voice, .principle, .pillar, .topic, .stat, .upsell__item, .freeship, .pdp__perks, .fact { --hover-bg: #fff; }
+.footer__cols .linklike, .footer__cols a { text-align: left; padding-inline: 0; }

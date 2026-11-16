@@ -41,7 +41,10 @@
     document.title = view.title;
     document.body.classList.toggle('is-checkout', r.key === 'kasse');
     document.body.classList.remove('has-sticky-atc');
-    B.burstTo(view.pose);
+    B.burstTo(view.pose, view.tone);
+    document.body.dataset.pc = B.pageColor(view.pose);
+    watchSections(app);
+    requestAnimationFrame(() => B.reserveWeights(document));
     $$('.main-nav a[data-nav]').forEach(a => { if (a.dataset.nav === r.nav) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     if (r.anchor) setTimeout(() => scrollToAnchor(r.anchor), 60); else window.scrollTo(0, 0);
     view.mount && view.mount(app);
@@ -54,6 +57,24 @@
     current = r; first = false; busy = false;
     if (queued) { queued = false; route(); }
   }
+  /* Startseite: Hintergrund-Sonne übernimmt die Farbe der Sektion in Bildschirmmitte */
+  let secIO;
+  function watchSections(root) {
+    secIO && secIO.disconnect();
+    const secs = $$('section[data-pc]', root); if (!secs.length || !('IntersectionObserver' in window)) return;
+    secIO = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) $('.burst-stage').dataset.tone = en.target.dataset.pc; }), { rootMargin: '-48% 0px -48% 0px' });
+    secs.forEach(s => secIO.observe(s));
+  }
+  /* Links & Buttons werden beim Hover „Black“ (900): Breite vorher reservieren, damit nichts springt */
+  const WSEL = '.main-nav a, .main-nav button, .footer__cols a, .footer__cols .linklike, .mnav__list a, .crumbs a, .btn, .chip, .link-arrow, .tab, .seg__btn, .size span';
+  function reserveWeight(el) {
+    if (el.dataset.w || !el.offsetWidth) return;
+    const prev = el.style.fontWeight; el.style.fontWeight = '900';
+    const w = el.getBoundingClientRect().width; el.style.fontWeight = prev;
+    el.style.minWidth = Math.ceil(w) + 'px'; el.dataset.w = '1';
+  }
+  B.reserveWeights = root => $$(WSEL, root || document).forEach(reserveWeight);
+  document.addEventListener('pointerover', e => { const el = e.target.closest && e.target.closest(WSEL); el && reserveWeight(el); }, { passive: true });
   function scrollToAnchor(id) {
     const el = document.getElementById(id); if (!el) return;
     const top = el.getBoundingClientRect().top + scrollY - 100;
@@ -145,12 +166,15 @@
 </div>`;
     $('#quick').innerHTML = `<div class="modal__box" role="document"><button class="icon-btn modal__close" type="button" data-action="close-layer" aria-label="Schnellansicht schließen">${icon('close')}</button><div class="modal__content"></div></div>`;
     document.body.insertAdjacentHTML('afterbegin', B.sunDefsSvg());
-    $('.burst-spin').innerHTML = B.sun({ variant: 'gelb35', anim: true, cls: 'sun--bg' });
-    $('.preloader__sun').innerHTML = B.sun({ anim: true, speed: 'fast' });
-    $('.route-bar__sun').innerHTML = B.sun({ anim: true, speed: 'fast' });
-    $('.processing__sun').innerHTML = B.sun({ anim: true, speed: 'fast' });
-    document.documentElement.style.setProperty('--sun-loader', `url("${B.sunDataURI('#FFDE48')}")`);
-    document.documentElement.style.setProperty('--sun-loader-zimt', `url("${B.sunDataURI('#AB5317')}")`);
+    $('.burst-spin').innerHTML = B.sun({ variant: 'blau', anim: true, cls: 'sun--bg' });
+    $('.preloader__sun').innerHTML = B.sun({ variant: 'blau', anim: true, speed: 'fast' });
+    $('.route-bar__sun').innerHTML = B.sun({ variant: 'page', anim: true, speed: 'fast' });
+    $('.processing__sun').innerHTML = B.sun({ variant: 'page', anim: true, speed: 'fast' });
+    document.documentElement.style.setProperty('--sun-loader', `url("${B.sunDataURI('#42ACE2')}")`);
+    document.documentElement.style.setProperty('--sun-loader-blau', `url("${B.sunDataURI('#42ACE2')}")`);
+    document.documentElement.style.setProperty('--sun-loader-rosa', `url("${B.sunDataURI('#EB579A')}")`);
+    document.documentElement.style.setProperty('--sun-loader-braun', `url("${B.sunDataURI('#E7825A')}")`);
+    document.documentElement.style.setProperty('--sun-loader-weiss', `url("${B.sunDataURI('#FFFFFF')}")`);
     B.renderChrome();
     B.renderCart();
     B.initChat();
@@ -166,6 +190,10 @@
     const done = () => { const wait = Math.max(0, (B.reduced ? 0 : 700) - (performance.now() - t0)); setTimeout(() => { pre.classList.add('is-done'); setTimeout(() => pre.remove(), 800); }, wait); };
     requestAnimationFrame(() => pre.classList.add('is-loading'));
     Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), wait(1600)]).then(done);
+    /* Black-Schnitt laden, dann Breiten neu reservieren */
+    if (document.fonts && document.fonts.load) document.fonts.load('900 1em Poppins').then(() => document.fonts.ready).then(() => {
+      $$('[data-w]').forEach(el => { el.style.minWidth = ''; delete el.dataset.w; }); B.reserveWeights(document);
+    }).catch(() => {});
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })(window.BAZ = window.BAZ || {});

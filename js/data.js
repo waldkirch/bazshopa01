@@ -14,15 +14,16 @@
     sand:     { name: 'Sand',     base: '#E5D3B8', shade: '#C7AF8B', deep: '#A68D68' },
     zimt:     { name: 'Zimt',     base: '#C98B5E', shade: '#A1653C', deep: '#7C4825' },
     schiefer: { name: 'Schiefer', base: '#ABA59D', shade: '#86807A', deep: '#625D56' },
-    sonne:    { name: 'Sonne',    base: '#FFDA4D', shade: '#EDBD24', deep: '#C99A0E' }
+    himmel:   { name: 'Himmel',   base: '#D3EAF7', shade: '#A6D2EC', deep: '#6FB2DA' },
+    rosa:     { name: 'Rosa',     base: '#F9D6E5', shade: '#EFAACA', deep: '#DE7FAB' }
   };
 
   B.CATEGORIES = [
-    { id: 'bettwaesche',   name: 'Bettwäsche',          claim: 'Alpaka & Bio-Leinen. Atmet mit dir.',          art: 'bedding', fabric: 'sand' },
-    { id: 'kissen',        name: 'Kissen',              claim: 'Von Hand gefüllt. Ein Leben lang anpassbar.',  art: 'pillow',  fabric: 'natur' },
-    { id: 'kissenbezuege', name: 'Kissenbezüge',        claim: 'Strick, Stickerei, Struktur.',                 art: 'cushion', fabric: 'creme' },
-    { id: 'bettdecken',    name: 'Bettdecken & Topper', claim: 'Drei Wärmeklassen. Null Kunstfaser.',          art: 'duvet',   fabric: 'natur' },
-    { id: 'wohnen',        name: 'Wohnaccessoires',     claim: 'Weiches für den Tag dazwischen.',              art: 'throw',   fabric: 'schiefer' }
+    { id: 'bettwaesche',   name: 'Bettwäsche',          claim: 'Alpaka & Bio-Leinen. Atmet mit dir.',          art: 'bedding', fabric: 'sand', theme: 'blau' },
+    { id: 'kissen',        name: 'Kissen',              claim: 'Von Hand gefüllt. Ein Leben lang anpassbar.',  art: 'pillow',  fabric: 'natur', theme: 'koralle' },
+    { id: 'kissenbezuege', name: 'Kissenbezüge',        claim: 'Strick, Stickerei, Struktur.',                 art: 'cushion', fabric: 'creme', theme: 'braun' },
+    { id: 'bettdecken',    name: 'Bettdecken & Topper', claim: 'Drei Wärmeklassen. Null Kunstfaser.',          art: 'duvet',   fabric: 'natur', theme: 'rosa' },
+    { id: 'wohnen',        name: 'Wohnaccessoires',     claim: 'Weiches für den Tag dazwischen.',              art: 'throw',   fabric: 'schiefer', theme: 'sand' }
   ];
 
   B.BADGES = {
@@ -65,7 +66,7 @@
     },
     {
       id: 'morgentau', name: 'Morgentau', type: 'Bettwäsche-Set', cat: 'bettwaesche', art: 'bedding',
-      fabrics: ['natur', 'sand', 'zimt'],
+      fabrics: ['natur', 'himmel', 'zimt'],
       sizes: [{ label: '135 × 200 + 80 × 80 cm', price: 219 }, { label: '155 × 220 + 80 × 80 cm', price: 259 }],
       badges: ['new'], stock: 15, added: 10,
       short: 'Bettwäsche aus Alpaka und Bio-Leinen – kühl im Sommer, kuschelig im Winter.',
@@ -89,10 +90,10 @@
     },
     {
       id: 'sonne', name: 'Sonne', type: 'Zierkissen mit Stickerei', cat: 'kissenbezuege', art: 'cushion', pattern: 'boucle', emblem: true,
-      fabrics: ['sonne', 'creme'],
+      fabrics: ['himmel', 'rosa', 'creme'],
       sizes: [{ label: '45 × 45 cm', price: 89 }],
       badges: ['new', 'handmade'], stock: 18, added: 12,
-      short: 'Unsere Bildmarke als Stickerei auf Alpaka-Bouclé. Gute Laune, die bleibt.',
+      short: 'Unsere Bildmarke als Stickerei auf Alpaka-Bouclé – in den Farben unseres Logos.',
       story: 'Die baz-Sonne wird mit Alpakagarn von Hand auf den Bouclé-Bezug gestickt – jedes Kissen ein klein wenig anders. Inklusive Inlett mit Alpakafüllung.',
       material: 'Bezug: 100 % Alpaka-Bouclé · Stickerei: Alpakagarn · Inlett: Bio-Baumwolle mit Alpakafüllung',
       care: 'Bezug: Handwäsche kalt, liegend trocknen. Inlett regelmäßig auslüften.',
@@ -137,7 +138,7 @@
     },
     {
       id: 'insel', name: 'Insel', type: 'Sitzkissen', cat: 'wohnen', art: 'pouf',
-      fabrics: ['sand', 'zimt', 'schiefer'],
+      fabrics: ['sand', 'rosa', 'schiefer'],
       sizes: [{ label: 'Ø 45 cm', price: 119 }],
       badges: [], stock: 9, added: 6,
       short: 'Bodenkissen, Fußhocker, Lieblingsplatz. Mit Kern aus Naturkautschuk.',

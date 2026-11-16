@@ -1,0 +1,106 @@
+/* ==========================================================================
+   baz · soft.css — „Ohne Konturen“
+   Rahmen & Haarlinien werden durch weiche Flächen ersetzt. Wo eine Linie
+   Bedeutung trägt (Unterstreichung, Zeitstrahl, Fortschritt), ist sie eine
+   Pille mit runden Enden. Fokus-Ringe bleiben (Barrierefreiheit).
+   ========================================================================== */
+:root { --line: transparent; --line-strong: transparent; --fill: var(--n-100); --fill-hover: var(--n-200); }
+
+/* Linien mit runden Enden */
+.eyebrow::before { height: 2.5px; border-radius: 3px; opacity: .8; }
+.link-arrow { border-bottom: 0; padding-bottom: .35em; position: relative; }
+.link-arrow::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; border-radius: 3px; background: currentColor; transition: background var(--t-fast), transform .45s var(--ease-spring); transform-origin: left; }
+.link-arrow:hover::after { background: var(--baz-sun); transform: scaleX(1.04); }
+.high { border-top: 0; padding-top: 0; }
+.high::before { content: ""; display: block; width: 56px; height: 5px; border-radius: 5px; background: var(--baz-sun); margin-bottom: var(--s-5); }
+.tl { border-top: 0; }
+.tl::before { content: ""; position: absolute; top: -2px; left: 0; right: -1.5rem; height: 4px; border-radius: 4px; background: var(--n-100); }
+.tl:last-child::before { right: 0; }
+.tl__dot { box-shadow: 0 0 0 4px var(--n-0); background: var(--action); top: -5px; }
+.chain__list::before { background: radial-gradient(circle, var(--n-300) 2px, transparent 2.5px) 0 50% / 12px 6px repeat-x !important; height: 6px !important; top: 29px !important; }
+
+/* Formularfelder: gefüllt statt umrandet */
+.field input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), .field textarea, .select select, .faq-search input, .chat__form input {
+  border-color: transparent; background: var(--fill); }
+.field input:hover, .field textarea:hover, .select select:hover, .faq-search input:hover { border-color: transparent; background: var(--fill-hover); }
+.field input:focus, .field textarea:focus, .select select:focus, .faq-search input:focus, .chat__form input:focus { background: var(--n-0); border-color: transparent; box-shadow: 0 0 0 4px var(--baz-sun), var(--sh-2); }
+.field.is-invalid input, .field.is-invalid textarea, .field.is-invalid select { border-color: transparent; background: var(--error-bg); box-shadow: inset 4px 0 0 var(--error); }
+.field.is-valid input:not([type="checkbox"]) { border-color: transparent; }
+.faq-search input { box-shadow: none; }
+.check input { border: 0; background: var(--n-200); }
+.check input:checked { background: var(--action); }
+.field.is-invalid .check input { background: var(--error-bg); box-shadow: inset 0 0 0 2px var(--error); }
+.switch__ui { background: var(--n-200); }
+
+/* Auswahl-Elemente */
+.chip { border-color: transparent; background: var(--fill); }
+.chip--x { background: var(--baz-sun-50); }
+.size span { border-color: transparent; background: var(--fill); }
+.size:hover span { border-color: transparent; background: var(--baz-sun-200); }
+.opt__box { border-color: transparent; background: var(--fill); }
+.opt:hover .opt__box { border-color: transparent; background: var(--baz-sun-50); }
+.opt input:checked + .opt__box { box-shadow: none; border-color: transparent; background: var(--baz-sun); }
+.opt input:checked + .opt__box em { color: var(--baz-cinnamon-700); }
+.swatch__dot { --vol: inset 0 -4px 8px rgba(94, 40, 20, .16), inset 0 3px 4px rgba(255, 255, 255, .7); box-shadow: var(--vol), 0 0 0 3px var(--n-0), 0 0 0 3px transparent; }
+.swatch input:checked + .swatch__dot { box-shadow: var(--vol), 0 0 0 3px var(--n-0), 0 0 0 6px var(--baz-sun); }
+.dot { box-shadow: inset 0 -3px 5px rgba(94, 40, 20, .18), inset 0 2px 3px rgba(255, 255, 255, .7); }
+button.dot::after { border: 0; inset: -5px; background: transparent; box-shadow: 0 0 0 0 var(--baz-sun); transition: box-shadow .3s var(--ease-spring); z-index: -1; }
+button.dot.is-on::after { box-shadow: 0 0 0 3px var(--baz-sun); }
+.fswatch:has(input:checked) { border-color: transparent; background: var(--baz-sun-50); }
+.qty { border-color: transparent; background: var(--fill); }
+.btn--ghost { border-color: transparent; background: var(--fill); }
+.icon-btn--line { border: 0; background: var(--fill); }
+.radiocard__box { box-shadow: none; background: var(--fill); }
+.radiocard__box::before { box-shadow: none; background: var(--n-0); }
+.radiocard input:checked + .radiocard__box { box-shadow: none; background: var(--baz-sun-50); }
+.radiocard input:checked + .radiocard__box::before { background: var(--n-0); box-shadow: inset 0 0 0 6px var(--action); }
+.badge--hand { box-shadow: none; background: var(--n-0); }
+.badge--out { box-shadow: none; }
+.code { border: 0; background: var(--baz-sun-50); }
+.coupon summary::before { border: 0; background: var(--fill); }
+.btn--atc .atc__sum { border-left: 0; padding-left: .4em; }
+.paybtn--google { box-shadow: none; background: var(--fill); }
+.payel__logo--google { box-shadow: none; }
+
+/* Flächen statt Ränder */
+.acc { margin-bottom: .5rem; padding: 0 1.15rem; border-radius: var(--r-md); background: var(--bg-soft); transition: background var(--t); }
+.acc:has(.acc__btn[aria-expanded="true"]) { background: var(--baz-sun-50); }
+.drawer .acc, .reviews .acc, .faq .acc, .dash__card .acc { background: var(--bg-soft); }
+.table-wrap { box-shadow: none; background: var(--bg-soft); }
+.ctable tbody tr:nth-child(even) > * { background: rgba(255, 255, 255, .7); }
+.ctable .is-us { background: var(--baz-sun-50) !important; }
+.mini-table tr:nth-child(odd) > * { background: var(--bg-soft); }
+.mini-table th, .mini-table td { padding-inline: .6rem; }
+.svc__card, .principle, .dash__card { box-shadow: none; background: var(--bg-soft); }
+.chain__ic { box-shadow: none; background: var(--fill); }
+.costep { box-shadow: none; background: var(--bg-soft); }
+.costep.is-active { box-shadow: var(--sh-3); background: var(--n-0); }
+.payel { box-shadow: none; background: var(--bg-soft); padding: .4rem; }
+.payel__tabs { gap: .3rem; }
+.payel__tab { border-right: 0; border-radius: var(--r-sm); background: var(--n-0); }
+.payel__tab:has(input:checked) { box-shadow: none; background: var(--baz-sun); }
+.payel__panel { background: var(--n-0); border-radius: var(--r-sm); margin-top: .4rem; }
+.pdp__thumb { box-shadow: none; }
+.pdp__thumb[aria-selected="true"] { box-shadow: none; background: var(--baz-sun-50); transform: scale(1.04); }
+.search__bar { border-bottom: 0; background: var(--fill); border-radius: var(--r-pill); padding: .4rem .5rem .4rem 1.4rem; margin-top: var(--s-3); }
+.mag-cover__meta { border-bottom: 0; flex-wrap: wrap; }
+.mag-cover__meta span { padding: .45rem .9rem; border-radius: var(--r-pill); background: var(--fill); }
+.mag-cover__foot { border-top: 0; }
+.hero__facts { border-top: 0; padding-top: 0; }
+.hero__facts li { padding: .9rem 1rem; border-radius: var(--r-md); background: rgba(255, 255, 255, .7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.value { border-top: 0; padding: var(--s-5) var(--s-5); border-radius: var(--r-lg); transition: background var(--t); }
+.value:last-child { border-bottom: 0; }
+.value:hover { background: var(--bg-soft); }
+.manifesto__lines li { border-bottom: 0; }
+.checklist--lg li { border-bottom: 0; padding: .7rem 0; }
+.story__step { border-top: 0; }
+.site-header.is-scrolled, .site-header.mega-open { box-shadow: 0 10px 30px -18px rgba(94, 40, 20, .25); }
+.sticky-atc { box-shadow: 0 -20px 40px rgba(94, 40, 20, .08); }
+.toast { box-shadow: var(--sh-float); }
+.chat__panel { box-shadow: var(--sh-3); }
+.cookie { box-shadow: var(--sh-3); }
+.co__or::before, .co__or::after { height: 3px; border-radius: 3px; background: var(--n-100); }
+.sumlines__art { box-shadow: none; background: var(--n-0); }
+.voice__stars { color: var(--n-200); }
+.mnav__cats a { border: 0; background: var(--fill); }
+.footer__pay li { border: 0; }

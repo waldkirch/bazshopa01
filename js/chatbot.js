@@ -58,7 +58,7 @@
   }
 
   function typing(cb) {
-    const t = add(`<span class="typing" role="status"><span class="typing__sun">${B.sun({ anim: true, speed: 'fast' })}</span><span>schreibt</span><i></i><i></i><i></i></span>`);
+    const t = add(`<span class="typing" role="status"><span class="typing__sun">${B.sun({ variant: 'page', anim: true, speed: 'fast' })}</span><span>schreibt</span><i></i><i></i><i></i></span>`);
     setTimeout(() => { t.remove(); cb(); }, B.reduced ? 0 : 520);
   }
 
@@ -69,7 +69,7 @@
       let h = `<p>${n.text}</p>`;
       const prods = n.product ? [n.product] : (n.products || []).map(id => [id, {}]);
       prods.forEach(([id, pre]) => { const p = B.product(id); if (!p) return;
-        h += `<a class="msg__product" href="#p-${p.id}" data-chat-pre='${JSON.stringify({ id: p.id, ...pre })}'><span class="msg__art">${B.art.product(p, p.fabrics[0])}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.type)}</small>${B.priceHtml(p, pre.size ?? (pre.opt != null ? 0 : undefined), pre.opt)}</span>${icon('arrow')}</a>`; });
+        h += `<a class="msg__product" ${B.themeAttr(p)} href="#p-${p.id}" data-chat-pre='${JSON.stringify({ id: p.id, ...pre })}'><span class="msg__art">${B.art.product(p, p.fabrics[0])}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.type)}</small>${B.priceHtml(p, pre.size ?? (pre.opt != null ? 0 : undefined), pre.opt)}</span>${icon('arrow')}</a>`; });
       if (n.link) h += `<a class="msg__link" href="${n.link[1]}">${n.link[0]} ${icon('arrow')}</a>`;
       add(h);
       quick(n.opts || (key === 'start' ? N.start.opts : [['Weitere Frage', 'start'], ['Team kontaktieren', 'contact']]));
@@ -109,9 +109,9 @@
 
   B.initChat = () => {
     const root = $('[data-chat]');
-    root.innerHTML = `<button class="chat__fab" type="button" aria-expanded="false" aria-controls="chat-panel" data-action="chat-toggle"><span class="chat__fab-ic">${icon('chat')}</span><span class="chat__fab-label">Fragen?</span></button>
+    root.innerHTML = `<button class="chat__fab" type="button" aria-expanded="false" aria-controls="chat-panel" data-action="chat-toggle" aria-label="Hilfe – Service-Assistent öffnen"><span class="chat__fab-sun">${B.sun({ variant: 'weiss', anim: true })}</span><span class="chat__fab-label" aria-hidden="true">Hilfe</span></button>
 <section class="chat__panel" id="chat-panel" aria-labelledby="chat-title" hidden>
-  <header class="chat__head"><span class="chat__avatar">${B.sun({ anim: true, speed: 'fast' })}</span><div><h2 class="chat__title" id="chat-title">baz Service</h2><small><span class="chat__online"></span>FAQ-Assistent · antwortet sofort</small></div><button class="icon-btn" type="button" data-action="chat-reset" aria-label="Unterhaltung neu starten">${icon('refresh')}</button><button class="icon-btn" type="button" data-action="chat-toggle" aria-label="Service-Assistent schließen">${icon('close')}</button></header>
+  <header class="chat__head"><span class="chat__avatar">${B.sun({ variant: 'weiss', anim: true })}</span><div><h2 class="chat__title" id="chat-title">baz Service</h2><small><span class="chat__online"></span>FAQ-Assistent · antwortet sofort</small></div><button class="icon-btn" type="button" data-action="chat-reset" aria-label="Unterhaltung neu starten">${icon('refresh')}</button><button class="icon-btn" type="button" data-action="chat-toggle" aria-label="Service-Assistent schließen">${icon('close')}</button></header>
   <div class="chat__log" role="log" aria-live="polite" aria-relevant="additions"></div>
   <div class="chat__quick" data-chat-quick></div>
   <form class="chat__form" data-chat-form><label class="visually-hidden" for="chat-in">Deine Frage</label><input id="chat-in" autocomplete="off" placeholder="Frage eingeben …"><button class="icon-btn chat__send" type="submit" aria-label="Senden">${icon('send')}</button></form>

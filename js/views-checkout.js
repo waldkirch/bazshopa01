@@ -27,13 +27,13 @@
       <p>${t.toFree === 0 ? `${icon('check')} <strong>Versandkostenfrei!</strong> Deine Bestellung reist kostenlos.` : `Noch <strong>${B.money(t.toFree)}</strong> bis zum kostenlosen Versand.`}</p>
       <div class="freeship__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct)}" aria-label="Fortschritt bis versandkostenfrei"><span style="width:${pct}%"></span></div>
     </div>
-    <ul class="lines">${items.map(l => `<li class="line" data-line="${l.key}">
+    <ul class="lines">${items.map(l => `<li class="line" ${B.themeAttr(l.p)} data-line="${l.key}">
       <a class="line__art" href="#p-${l.id}">${B.art.product(l.p, l.fabric, 'main', l.p.sizes[l.size])}</a>
       <div class="line__info"><a class="line__name" href="#p-${l.id}">${esc(l.p.name)}</a><p class="line__var">${[l.p.type, l.sizeLabel, l.fabricLabel, l.optLabel].filter(Boolean).join(' · ')}</p>
         <div class="line__row">${B.qtyStepper(l.qty, `data-line-qty="${l.key}"`, l.p.stock)}<button class="linklike line__rm" type="button" data-action="remove-line" data-key="${l.key}">Entfernen</button></div></div>
       <p class="line__price">${B.money(l.total)}${l.p.sale ? `<small class="price__now--sale">−${l.p.sale} %</small>` : ''}</p>
     </li>`).join('')}</ul>
-    ${cross.length ? `<div class="upsell"><p class="upsell__h">Passt dazu</p>${cross.map(p => `<div class="upsell__item"><span class="upsell__art">${B.art.product(p, p.fabrics[0])}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.type)}</small></span>${B.priceHtml(p)}<button class="icon-btn icon-btn--line" type="button" data-action="quick" data-id="${p.id}" aria-label="${esc(p.name)} auswählen">${icon('plus')}</button></div>`).join('')}</div>` : ''}
+    ${cross.length ? `<div class="upsell"><p class="upsell__h">Passt dazu</p>${cross.map(p => `<div class="upsell__item" ${B.themeAttr(p)}><span class="upsell__art">${B.art.product(p, p.fabrics[0])}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.type)}</small></span>${B.priceHtml(p)}<button class="icon-btn icon-btn--line" type="button" data-action="quick" data-id="${p.id}" aria-label="${esc(p.name)} auswählen">${icon('plus')}</button></div>`).join('')}</div>` : ''}
   </div>
   <footer class="drawer__foot">
     ${couponBlock('cart')}
@@ -42,7 +42,7 @@
     <p class="drawer__pay">Karte · Apple Pay · Google Pay · Klarna · SEPA</p>
   </footer>` : `
   <div class="drawer__body drawer__empty">
-    <div class="empty"><div class="empty__art">${B.sun({ anim: true })}</div><h3 class="h3">Dein Warenkorb ist noch leer.</h3><p>Zeit für etwas Weiches. Unsere Lieblingsstücke warten schon.</p><a class="btn btn--primary" href="#shop">Kollektion entdecken</a><a class="btn btn--text" href="#kat-kissen">Zu den Kissen</a></div>
+    <div class="empty"><div class="empty__art">${B.sun({ variant: 'page', anim: true })}</div><h3 class="h3">Dein Warenkorb ist noch leer.</h3><p>Zeit für etwas Weiches. Unsere Lieblingsstücke warten schon.</p><a class="btn btn--primary" href="#shop">Kollektion entdecken</a><a class="btn btn--text" href="#kat-kissen">Zu den Kissen</a></div>
   </div>`}
 </div>`;
   
@@ -94,7 +94,7 @@
   V.checkout = () => {
     if (!B.cart.count()) return {
       title: 'Kasse · baz', pose: 'kasse',
-      html: `<section class="co-empty container"><div class="empty"><div class="empty__art">${B.sun({ anim: true })}</div><h1 class="h2" tabindex="-1">Dein Warenkorb ist leer.</h1><p>Bevor es an die Kasse geht, braucht es etwas Weiches.</p><a class="btn btn--primary" href="#shop">Zum Shop</a></div></section>`
+      html: `<section class="co-empty container"><div class="empty"><div class="empty__art">${B.sun({ variant: 'page', anim: true })}</div><h1 class="h2" tabindex="-1">Dein Warenkorb ist leer.</h1><p>Bevor es an die Kasse geht, braucht es etwas Weiches.</p><a class="btn btn--primary" href="#shop">Zum Shop</a></div></section>`
     };
     co.step = 1;
     const a = B.state.lastAddress || {}; ['email', 'first', 'last', 'street', 'zip', 'city'].forEach(k => { if (!co.data[k] && a[k]) co.data[k] = a[k]; });
@@ -161,7 +161,7 @@
 
   function renderSummary(root) {
     const t = B.cart.totals(co.data.country, co.data.method);
-    $('[data-summary]', root).innerHTML = `<ul class="sumlines">${B.cart.items().map(l => `<li><span class="sumlines__art">${B.art.product(l.p, l.fabric, 'main', l.p.sizes[l.size])}<em>${l.qty}</em></span><span><strong>${esc(l.p.name)}</strong><small>${[l.sizeLabel, l.fabricLabel, l.optLabel].filter(Boolean).join(' · ')}</small></span><span>${B.money(l.total)}</span></li>`).join('')}</ul>
+    $('[data-summary]', root).innerHTML = `<ul class="sumlines">${B.cart.items().map(l => `<li ${B.themeAttr(l.p)}><span class="sumlines__art">${B.art.product(l.p, l.fabric, 'main', l.p.sizes[l.size])}<em>${l.qty}</em></span><span><strong>${esc(l.p.name)}</strong><small>${[l.sizeLabel, l.fabricLabel, l.optLabel].filter(Boolean).join(' · ')}</small></span><span>${B.money(l.total)}</span></li>`).join('')}</ul>
 ${couponBlock('co')}
 <dl class="totals"><div><dt>Zwischensumme</dt><dd>${B.money(t.sub)}</dd></div>${t.disc ? `<div class="totals__disc"><dt>Rabatt (${B.state.coupon})</dt><dd>−${B.money(t.disc)}</dd></div>` : ''}<div><dt>Versand</dt><dd>${co.step >= 2 || t.ship === 0 ? (t.ship ? B.money(t.ship) : 'kostenlos') : 'wird berechnet'}</dd></div><div class="totals__sum"><dt>Gesamt <small>inkl. ${B.money(t.vat)} MwSt.</small></dt><dd>${B.money(t.total)}</dd></div></dl>
 <ul class="co__trust"><li>${icon('lock')} SSL-verschlüsselt</li><li>${icon('refresh')} 30 Tage Rückgabe</li><li>${icon('leaf')} Plastikfrei verpackt</li></ul>`;
@@ -298,7 +298,7 @@ ${couponBlock('co')}
     const o = B.lastOrder || B.state.orders[0];
     if (!o) return V.notFound();
     const html = `<section class="thanks container">
-  <div class="thanks__burst" aria-hidden="true">${B.sun({ anim: true })}</div>
+  <div class="thanks__burst" aria-hidden="true">${B.sun({ variant: 'page', anim: true })}</div>
   <p class="eyebrow">Bestellung ${o.no}</p>
   <h1 class="mega-title thanks__title" tabindex="-1">Danke,<br>${esc(o.address.first)}!</h1>
   <p class="lead">Deine Bestellung ist eingegangen. Im Live-Shop bekommst du jetzt eine Bestätigung an <strong>${esc(o.email)}</strong>. <span class="muted">(Demo: keine echte Bestellung, keine Zahlung, keine E-Mail.)</span></p>

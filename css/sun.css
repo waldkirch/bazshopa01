@@ -27,7 +27,7 @@
 /* Routen-Ladebalken: Sonne „reitet“ an der Spitze */
 .route-bar { position: fixed; inset: 0 0 auto; height: 3px; z-index: calc(var(--z-header) + 2); pointer-events: none; }
 .route-bar__fill { position: absolute; left: 0; top: 0; height: 100%; width: 0; background: linear-gradient(90deg, var(--baz-sun), var(--baz-cinnamon)); border-radius: 0 3px 3px 0; opacity: 0; }
-.route-bar__sun { position: absolute; right: -13px; top: -11px; width: 26px; filter: drop-shadow(0 2px 4px rgba(78, 36, 8, .25)); }
+.route-bar__sun { position: absolute; right: -13px; top: -11px; width: 26px; filter: drop-shadow(0 2px 4px rgba(94, 40, 20, .25)); }
 .route-bar.is-loading .route-bar__fill { opacity: 1; width: 72%; transition: width .5s var(--ease), opacity .1s; }
 .route-bar.is-done .route-bar__fill { width: 100%; opacity: 0; transition: width .25s var(--ease), opacity .4s .3s; }
 
